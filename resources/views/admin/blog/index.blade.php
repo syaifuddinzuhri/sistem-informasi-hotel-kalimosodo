@@ -1,14 +1,17 @@
 @extends('admin.layouts.main')
 
 @section('content')
-    <div class="page-heading">
-        <h3>Dashboard</h3>
-    </div>
+<div class="page-heading">
+    <h3>Blog</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">Dashboard</li>
+            <li class="breadcrumb-item active" aria-current="page">Blog</li>
+        </ol>
+    </nav>
+</div>
     <div class="page-content" style="min-height: 80vh">
         <section class="row">
-            <div class="col-12">
-                <h1>Blog</h1>
-            </div>
         </section>
     </div>
 @endsection

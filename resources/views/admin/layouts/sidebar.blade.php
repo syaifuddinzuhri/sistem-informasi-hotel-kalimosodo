@@ -34,7 +34,7 @@
                 <li class="sidebar-item {{Request::is('admin/room') ? 'active' : ''}}">
                     <a href="{{ route('room.index') }}" class='sidebar-link'>
                         <i class="fas fa-fw fa-person-booth"></i>
-                        <span>Room</span>
+                        <span>Kamar</span>
                     </a>
                 </li>
 
