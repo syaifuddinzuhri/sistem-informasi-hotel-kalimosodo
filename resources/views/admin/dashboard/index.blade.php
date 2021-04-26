@@ -22,8 +22,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
+                                        <h6 class="text-muted font-semibold">User</h6>
+                                        <h6 class="font-extrabold mb-0">500</h6>
                                     </div>
                                 </div>
                             </div>
@@ -39,8 +39,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
+                                        <h6 class="text-muted font-semibold">Kamar</h6>
+                                        <h6 class="font-extrabold mb-0">100</h6>
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +56,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
+                                        <h6 class="text-muted font-semibold">Fasilitas</h6>
+                                        <h6 class="font-extrabold mb-0">120</h6>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +73,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
+                                        <h6 class="text-muted font-semibold">Blog</h6>
+                                        <h6 class="font-extrabold mb-0">40</h6>
                                     </div>
                                 </div>
                             </div>
