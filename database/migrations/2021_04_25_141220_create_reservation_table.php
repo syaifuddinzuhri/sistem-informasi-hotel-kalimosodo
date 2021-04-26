@@ -21,7 +21,7 @@ class CreateReservationTable extends Migration
             $table->foreign('room_id')->references('id')->on('room');
             $table->date('check_in');
             $table->date('check_out');
-            $table->string('description', 30);
+            $table->string('description', 30)->nullable();
             $table->timestamps();
         });
     }
