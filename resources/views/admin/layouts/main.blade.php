@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('admin-templates') }}/assets/css/bootstrap.css">
     <link rel="stylesheet" href="{{ asset('admin-templates') }}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('admin-templates') }}/assets/css/app.css">
-    <link rel="shortcut icon" href="{{ asset('admin-templates') }}/assets/images/favicon.svg" type="image/x-icon">
+    {{-- <link rel="shortcut icon" href="{{ asset('admin-templates') }}/assets/images/favicon.svg" type="image/x-icon"> --}}
 
     <style>
         .btn-loading{

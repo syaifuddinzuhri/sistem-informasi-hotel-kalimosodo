@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+
+    protected $model;
+
+    public function __construct(Room $room)
+    {
+        $this->model = new Repository($room);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,5 +90,27 @@ class RoomController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function room(){
+        $data = $this->model->all();
+        return datatables()->of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-room"
+                data-bs-target="#editRoomModal"
+                data-id="'. $data->id .'"><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>
+            <a href="#" data-bs-toggle="modal" class="btn-delete-room"
+                data-bs-target="#deleteRoomModal"
+                data-id="'. $data->id .'"><span class="badge bg-danger">
+                <i class="fas fa-trash"></i>
+            </span></a>
+                ';
+                return $update;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }
