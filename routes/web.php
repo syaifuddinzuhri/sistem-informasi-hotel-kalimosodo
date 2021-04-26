@@ -39,5 +39,6 @@ Route::prefix('api')->group(function () {
     Route::get('/data-facility', [FacilityController::class, 'facility'])->name('api.facility');
     Route::get('/room', [RoomController::class, 'room'])->name('api.room');
     Route::get('/users', [UserController::class, 'user'])->name('api.user');
+    Route::get('/blog', [RoomController::class, 'room'])->name('api.blog');
     Route::get('/data-room-type', [RoomTypeController::class, 'room_type'])->name('api.room_type');
 });

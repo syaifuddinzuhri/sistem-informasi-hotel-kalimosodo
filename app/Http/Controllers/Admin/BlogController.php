@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+
+    protected $model;
+
+    public function __construct(Blog $blog)
+    {
+        $this->model = new Repository($blog);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -81,5 +90,27 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function blog(){
+        $data = $this->model->all();
+        return datatables()->of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-blog"
+                data-bs-target="#editBlogModal"
+                data-id="'. $data->id .'"><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>
+            <a href="#" data-bs-toggle="modal" class="btn-delete-blog"
+                data-bs-target="#deleteBlogModal"
+                data-id="'. $data->id .'"><span class="badge bg-danger">
+                <i class="fas fa-trash"></i>
+            </span></a>
+                ';
+                return $update;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

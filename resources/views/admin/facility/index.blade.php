@@ -33,7 +33,7 @@
                                 <th>Nama</th>
                                 <th>Deskripsi</th>
                                 <th>Aktif</th>
-                                <th>Aksi</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
