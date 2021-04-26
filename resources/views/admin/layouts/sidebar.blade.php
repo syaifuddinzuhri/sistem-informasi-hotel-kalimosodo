@@ -4,7 +4,8 @@
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a href="#">
-                        <img src="{{ asset('img/logo.png') }}" alt="Logo" srcset="">
+                    Kalimosodo
+                        {{-- <img src="{{ asset('img/logo.png') }}" alt="Logo" srcset=""> --}}
                     </a>
                 </div>
                 <div class="toggler">
@@ -16,58 +17,51 @@
             <ul class="menu">
                 <li class="sidebar-title">ADMINISTRATOR</li>
 
-                <li class="sidebar-item active ">
+                <li class="sidebar-item {{Request::is('admin/dashboard') ? 'active' : ''}}">
                     <a href="{{ route('dashboard.index') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
+                <li class="sidebar-item {{Request::is('admin/user') ? 'active' : ''}}">
                     <a href="{{ route('user.index') }}" class='sidebar-link'>
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-fw fa-users"></i>
                         <span>User</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
-                    <a href="{{ route('customer.index') }}" class='sidebar-link'>
-                        <i class="fas fa-users"></i>
-                        <span>Customer</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item ">
+                <li class="sidebar-item {{Request::is('admin/room') ? 'active' : ''}}">
                     <a href="{{ route('room.index') }}" class='sidebar-link'>
-                        <i class="fas fa-person-booth"></i>
+                        <i class="fas fa-fw fa-person-booth"></i>
                         <span>Room</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
+                <li class="sidebar-item {{Request::is('admin/facility') ? 'active' : ''}}">
                     <a href="{{ route('facility.index') }}" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Facility</span>
+                        <span>Fasilitas</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
+                <li class="sidebar-item {{Request::is('admin/reservation') ? 'active' : ''}}">
                     <a href="" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
                         <span>Reservasi</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
+                <li class="sidebar-item {{Request::is('admin/blog') ? 'active' : ''}}">
                     <a href="{{ route('blog.index') }}" class='sidebar-link'>
-                        <i class="fas fa-newspaper"></i>
+                        <i class="fas fa-fw fa-newspaper"></i>
                         <span>Blog</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item ">
+                <li class="sidebar-item">
                     <a href="{{ route('dashboard.index') }}" class='sidebar-link'>
-                        <i class="fa fa-sign-out-alt"></i>
+                        <i class="fa fa-fw fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </a>
                 </li>
