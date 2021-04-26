@@ -48,6 +48,7 @@ class FacilityController extends Controller
     {
         $data = $request->all();
         $this->model->create($data);
+        return response()->json(['success' => true], 201);
         // if($request->ajax()){
         //     Session::flash('success','Data Fasilitas Berhasil Di Simpan');
         //     $response = array(
@@ -93,14 +94,15 @@ class FacilityController extends Controller
     {
         $data = $request->all();
         $this->model->update($data, $id);
-        if($request->ajax()){
-            Session::flash('success','Data Fasilitas Berhasil Di Update');
-            $response = array(
-                'status' => 'success',
-                'url' => route('admin.facility.index'),
-            );
-            return $response;
-        }
+        return response()->json(['success' => true], 200);
+        // if($request->ajax()){
+        //     Session::flash('success','Data Fasilitas Berhasil Di Update');
+        //     $response = array(
+        //         'status' => 'success',
+        //         'url' => route('admin.facility.index'),
+        //     );
+        //     return $response;
+        // }
     }
 
     /**
@@ -124,7 +126,7 @@ class FacilityController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-facility"
-                data-bs-target="#facilityModal"
+                data-bs-target="#editFacilityModal"
                 data-id="'. $data->id .'"><span class="badge bg-success">
                 <i class="fas fa-edit"></i>
             </span></a>

@@ -5,15 +5,15 @@ $(document).ready(function () {
     const splitURL = pathURL.split("/");
 
     if (pathURL == "/admin/facility" || pathURL == "/admin/facility/") {
+        facility.dataTable();
 
         $("#btn-add-facility").on("click", function(){
-            $('#modal-title-facility').html("Add New Facility")
-            $("#formFacility")[0].reset();
+            $("#formAddFacility")[0].reset();
+            facility.storeFacility();
         })
 
-        facility.dataTable();
-        facility.storeFacility();
         facility.editFacility();
+
         facility.deleteFacility();
         // $("#sync-facility").on("click", function () {
         //     $("#tablefacility").DataTable().ajax.reload();

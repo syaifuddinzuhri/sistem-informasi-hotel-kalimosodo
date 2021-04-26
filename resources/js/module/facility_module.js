@@ -51,26 +51,17 @@ class Facility{
         handle.setup();
         var isActive = 0;
         $("#is_active").on('change', function() {
-            if ($(this).is(':checked')) {
-                isActive = 1;
-            }
+            $(this).is(':checked') ? isActive = 1 : isActive = 0;
+
         });
-        $("#formFacility").validate({
+        $("#formAddFacility").validate({
             rules: {
-                name: {
-                    required: true,
-                },
-                description: {
-                    required: true,
-                },
+                name: { required: true },
+                description: {required: true },
             },
             messages: {
-                name: {
-                    required: "Nama fasilitas tidak boleh kosong",
-                },
-                description: {
-                    required: "Deskripsi tidak boleh kosong",
-                },
+                name: { required: "Nama fasilitas tidak boleh kosong" },
+                description: {required: "Deskripsi tidak boleh kosong" },
             },
             errorElement: "span",
             errorPlacement: (error, element) => {
@@ -94,35 +85,23 @@ class Facility{
                     url: APP_URL + "/admin/facility",
                     data: data,
                     beforeSend: function () {
-                        $(
-                            "#formFacility .btn-loading"
-                        ).show();
-                        $(
-                            "#formFacility .btn-submit"
-                        ).hide();
+                        $("#formAddFacility .btn-loading").show();
+                        $("#formAddFacility .btn-submit").hide();
                     },
                     success: function (res) {
-                        $(
-                            "#formFacility .btn-loading"
-                        ).hide();
-                        $(
-                            "#formFacility .btn-submit"
-                        ).show();
+                        $("#formAddFacility .btn-loading").hide();
+                        $("#formAddFacility .btn-submit").show();
                         $("#table_facility").DataTable().ajax.reload();
-                        $("#formFacility")[0].reset();
-                        $("#facilityModal").modal("hide")
+                        $("#formAddFacility")[0].reset();
+                        $("#addFacilityModal").modal("hide")
                         Swal.fire({
                             icon: "success",
                             title: "Success"
                         })
                     },
                     error: (e, x, settings, exception) => {
-                        $(
-                            "#formFacility .btn-loading"
-                        ).hide();
-                        $(
-                            "#formFacility .btn-submit"
-                        ).show();
+                        $("#formAddFacility .btn-loading").hide();
+                        $("#formAddFacility .btn-submit").show();
                         handle.errorhandle(e, x, settings, exception);
                     },
                 });
@@ -132,41 +111,31 @@ class Facility{
 
     editFacility() {
         handle.setup();
-
         var id = "";
+        var isActive = 0;
+
         $("#table_facility").on("click", ".btn-edit-facility", function () {
-            $('#modal-title-facility').html("Edit Facility")
+            $("#formEditFacility")[0].reset();
             id = $(this).attr('data-id');
             $.get(`${APP_URL}/admin/facility/${id}/edit`, function(res){
-                $("#name").val(res.data.name);
-                $("#description").val(res.data.description);
-                res.data.is_active == 1 ? $("#is_active").attr("checked", true) : $("#is_active").attr("checked", false);
+                $("#name_edit").val(res.data.name);
+                $("#description_edit").val(res.data.description);
+                res.data.is_active == 1 ? $("#is_active_edit").attr("checked", true) : $("#is_active_edit").attr("checked", false);
+                isActive = res.data.is_active
             })
         });
-
-        var isActive = 0;
-        $("#is_active").on('change', function() {
-            if ($(this).is(':checked')) {
-                isActive = 1;
-            }
+        $("#is_active_edit").on('change', function() {
+            $(this).is(':checked') ? isActive = 1 : isActive = 0;
         });
 
-        $("#formFacility").validate({
+        $("#formEditFacility").validate({
             rules: {
-                name: {
-                    required: true,
-                },
-                description: {
-                    required: true,
-                },
+                name: { required: true },
+                description: {required: true },
             },
             messages: {
-                name: {
-                    required: "Nama fasilitas tidak boleh kosong",
-                },
-                description: {
-                    required: "Deskripsi tidak boleh kosong",
-                },
+                name: { required: "Nama fasilitas tidak boleh kosong" },
+                description: {required: "Deskripsi tidak boleh kosong" },
             },
             errorElement: "span",
             errorPlacement: (error, element) => {
@@ -181,8 +150,8 @@ class Facility{
             },
             submitHandler: function () {
                 var data = {
-                    name: $("#name").val(),
-                    description: $("#description").val(),
+                    name: $("#name_edit").val(),
+                    description: $("#description_edit").val(),
                     is_active: isActive
                 };
                 $.ajax({
@@ -190,35 +159,23 @@ class Facility{
                     url: APP_URL + "/admin/facility/" + id,
                     data: data,
                     beforeSend: function () {
-                        $(
-                            "#formFacility .btn-loading"
-                        ).show();
-                        $(
-                            "#formFacility .btn-submit"
-                        ).hide();
+                        $("#formEditFacility .btn-loading").show();
+                        $("#formEditFacility .btn-submit").hide();
                     },
                     success: function (res) {
-                        $(
-                            "#formFacility .btn-loading"
-                        ).hide();
-                        $(
-                            "#formFacility .btn-submit"
-                        ).show();
+                        $("#formEditFacility .btn-loading").hide();
+                        $("#formEditFacility .btn-submit").show();
                         $("#table_facility").DataTable().ajax.reload();
-                        $("#formFacility")[0].reset();
-                        $("#facilityModal").modal("hide")
+                        $("#formEditFacility")[0].reset();
+                        $("#editFacilityModal").modal("hide")
                         Swal.fire({
                             icon: "success",
                             title: "Success"
                         })
                     },
                     error: (e, x, settings, exception) => {
-                        $(
-                            "#formFacility .btn-loading"
-                        ).hide();
-                        $(
-                            "#formFacility .btn-submit"
-                        ).show();
+                        $("#formEditFacility .btn-loading").hide();
+                        $("#formEditFacility .btn-submit").show();
                         handle.errorhandle(e, x, settings, exception);
                     },
                 });
