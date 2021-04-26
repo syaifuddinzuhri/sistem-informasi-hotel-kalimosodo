@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Repository implements RepositoryInterface
 {
-    
+
     protected $model;
 
     public function __construct(Model $model)
@@ -35,7 +35,7 @@ class Repository implements RepositoryInterface
 
     public function show($id)
     {
-        return $this->model-findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 
     public function getModel()

@@ -7,6 +7,7 @@ use App\Models\Facility;
 use App\Repositories\Repository;
 use App\Http\Requests\FacilityRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FacilityController extends Controller
 {
@@ -47,14 +48,14 @@ class FacilityController extends Controller
     {
         $data = $request->all();
         $this->model->create($data);
-        if($request->ajax()){
-            \Session::flash('success','Data Fasilitas Berhasil Di Simpan');
-            $response = array(
-                'status' => 'success',
-                'url' => route('admin.facility.index'),
-            );
-            return $response;
-        }
+        // if($request->ajax()){
+        //     Session::flash('success','Data Fasilitas Berhasil Di Simpan');
+        //     $response = array(
+        //         'status' => 'success',
+        //         'url' => route('admin.facility.index'),
+        //     );
+        //     return $response;
+        // }
     }
 
     /**
@@ -65,7 +66,8 @@ class FacilityController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -76,7 +78,8 @@ class FacilityController extends Controller
      */
     public function edit($id)
     {
-        return $this->model->getModel()::findOrFail($id);
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -91,7 +94,7 @@ class FacilityController extends Controller
         $data = $request->all();
         $this->model->update($data, $id);
         if($request->ajax()){
-            \Session::flash('success','Data Fasilitas Berhasil Di Update');
+            Session::flash('success','Data Fasilitas Berhasil Di Update');
             $response = array(
                 'status' => 'success',
                 'url' => route('admin.facility.index'),
@@ -109,9 +112,10 @@ class FacilityController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()
-            ->route('admin.facility.index')
-            ->with('success', 'Data Fasilitas Berhasil di Hapus');
+        return response()->json(['success' => true], 200);
+        // return redirect()
+        //     ->route('admin.facility.index')
+        //     ->with('success', 'Data Fasilitas Berhasil di Hapus');
     }
 
     public function facility(){
@@ -119,13 +123,16 @@ class FacilityController extends Controller
         return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-                $update = '<a class="btn btn-primary btn-xs modal-edit-facility" href="#" data-toggle="modal" data-target="#exampleModalCenter"
-                data-id="'. $data->id .'">Edit</a>
-                    <form style="display: inline-block;" method="POST" action=" '.route('facility.destroy', $data->id).'" class="hapus" data-facility="'.$data->name.'">
-                    '. method_field('delete'). '
-                    <input type="hidden" name="_token" value="'.csrf_token().'">
-                    <a href="#" class="btn btn-danger btn-xs">Hapus</a>                   
-                </form>
+                $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-facility"
+                data-bs-target="#facilityModal"
+                data-id="'. $data->id .'"><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>
+            <a href="#" data-bs-toggle="modal" class="btn-delete-facility"
+                data-bs-target="#deleteFacilityModal"
+                data-id="'. $data->id .'"><span class="badge bg-danger">
+                <i class="fas fa-trash"></i>
+            </span></a>
                 ';
                 return $update;
             })
