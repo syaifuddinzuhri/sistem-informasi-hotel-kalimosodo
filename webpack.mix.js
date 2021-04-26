@@ -18,3 +18,4 @@ const mix = require('laravel-mix');
 
     mix.js("resources/js/facility.js", "public/js").sourceMaps();
     mix.js("resources/js/room.js", "public/js").sourceMaps();
+    mix.js("resources/js/user.js", "public/js").sourceMaps();

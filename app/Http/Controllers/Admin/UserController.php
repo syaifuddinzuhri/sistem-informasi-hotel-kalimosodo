@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $model;
+
+    public function __construct(User $user)
+    {
+        $this->model = new Repository($user);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        //
     }
 
     /**
@@ -46,7 +54,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('admin.user.detail');
+        //
     }
 
     /**
@@ -57,7 +65,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.edit');
+        //
     }
 
     /**
@@ -81,5 +89,27 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function user(){
+        $data = $this->model->all();
+        return datatables()->of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-user"
+                data-bs-target="#editUserModal"
+                data-id="'. $data->id .'"><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>
+            <a href="#" data-bs-toggle="modal" class="btn-delete-user"
+                data-bs-target="#deleteUserModal"
+                data-id="'. $data->id .'"><span class="badge bg-danger">
+                <i class="fas fa-trash"></i>
+            </span></a>
+                ';
+                return $update;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }
