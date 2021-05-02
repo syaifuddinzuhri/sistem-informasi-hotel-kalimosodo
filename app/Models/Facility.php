@@ -15,4 +15,9 @@ class Facility extends Model
         'description',
         'is_active'
     ];
+
+    public function room_has_facility()
+    {
+        return $this->belongsToMany(Room::class, 'room_has_facility', 'facility_id', 'room_id');
+    }
 }

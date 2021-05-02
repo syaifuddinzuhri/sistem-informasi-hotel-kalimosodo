@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Repositories\Repository;
+use App\Http\Requests\RoomRequest;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -42,9 +43,14 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
-        //
+        $payload = $request->all();
+        if($request->hasFile('image')){
+			$payload['image'] = uploadFoto($request->file('image'), 'image');
+        }
+        $this->model->create($payload);
+        return response()->json(['success' => true], 201);
     }
 
     /**
@@ -55,7 +61,8 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -66,7 +73,8 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -76,9 +84,17 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoomRequest $request, $id)
     {
-        //
+        $payload = $request->all();
+        $room = Room::findOrFail($id);
+		if($request->hasFile('image')){
+            $payload['image'] = updateFoto($room->image_gudang, 'image', $request->file('image'), 'image');
+        }else{
+            $payload['image'] = $room->image;
+        }
+        $room->update($payload);
+        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -89,7 +105,8 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return response()->json(['success' => true], 200);
     }
 
     public function room(){

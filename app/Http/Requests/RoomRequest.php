@@ -27,6 +27,7 @@ class RoomRequest extends FormRequest
             'room_type_id'  => 'required',
             'name'          => 'required',
             'price'         => 'required',
+            'image'         => 'required',
             'is_active'     => 'required',
         ];
     }
@@ -37,6 +38,7 @@ class RoomRequest extends FormRequest
             'room_type_id.required' => 'tipe kamar tidak boleh kosong',
             'name.required'         => 'nama kamar tidak boleh kosong',
             'price.required'        => 'harga kamar tidak boleh kosong',
+            'image.required'        => 'image kamar tidak boleh kosong',
             'is_active.required'    => 'aktivasi kamar tidak boleh kosong',
         ];
     }

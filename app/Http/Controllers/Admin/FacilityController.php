@@ -49,14 +49,6 @@ class FacilityController extends Controller
         $data = $request->all();
         $this->model->create($data);
         return response()->json(['success' => true], 201);
-        // if($request->ajax()){
-        //     Session::flash('success','Data Fasilitas Berhasil Di Simpan');
-        //     $response = array(
-        //         'status' => 'success',
-        //         'url' => route('admin.facility.index'),
-        //     );
-        //     return $response;
-        // }
     }
 
     /**
@@ -95,14 +87,6 @@ class FacilityController extends Controller
         $data = $request->all();
         $this->model->update($data, $id);
         return response()->json(['success' => true], 200);
-        // if($request->ajax()){
-        //     Session::flash('success','Data Fasilitas Berhasil Di Update');
-        //     $response = array(
-        //         'status' => 'success',
-        //         'url' => route('admin.facility.index'),
-        //     );
-        //     return $response;
-        // }
     }
 
     /**
@@ -115,9 +99,6 @@ class FacilityController extends Controller
     {
         $this->model->delete($id);
         return response()->json(['success' => true], 200);
-        // return redirect()
-        //     ->route('admin.facility.index')
-        //     ->with('success', 'Data Fasilitas Berhasil di Hapus');
     }
 
     public function facility(){

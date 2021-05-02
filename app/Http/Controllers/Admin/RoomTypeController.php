@@ -47,14 +47,7 @@ class RoomTypeController extends Controller
     {
         $data = $request->all();
         $this->model->create($data);
-        if($request->ajax()){
-            \Session::flash('success','Data Tipe Kamar Berhasil Di Simpan');
-            $response = array(
-                'status' => 'success',
-                'url' => route('admin.room-type.index'),
-            );
-            return $response;
-        }
+        return response()->json(['success' => true], 201);
     }
 
     /**
@@ -65,7 +58,8 @@ class RoomTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -76,7 +70,8 @@ class RoomTypeController extends Controller
      */
     public function edit($id)
     {
-        return $this->model->getModel()::findOrFail($id);
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -90,14 +85,7 @@ class RoomTypeController extends Controller
     {
         $data = $request->all();
         $this->model->update($data, $id);
-        if($request->ajax()){
-            \Session::flash('success','Data Tipe Kamar Berhasil Di Update');
-            $response = array(
-                'status' => 'success',
-                'url' => route('admin.room-type.index'),
-            );
-            return $response;
-        }
+        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -109,9 +97,7 @@ class RoomTypeController extends Controller
     public function destroy($id)
     {
         $this->model->delete($id);
-        return redirect()
-            ->route('admin.facility.index')
-            ->with('success', 'Data Fasilitas Berhasil di Hapus');
+        return response()->json(['success' => true], 200);
     }
 
     public function room_type(){
