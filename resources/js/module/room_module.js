@@ -21,7 +21,7 @@ class Room {
                     data: "image",
                     render: function (data) {
                         if (data != null) {
-                            var img = `${APP_URL}/image/${data}`;
+                            var img = `${APP_URL}/room/${data}`;
                             return (
                                 '<img src="' +
                                 img +
@@ -35,6 +35,10 @@ class Room {
                 {
                     data: "name",
                     name: "name",
+                },
+                {
+                    data: "room_type",
+                    name: "room_type",
                 },
                 {
                     data: "price",

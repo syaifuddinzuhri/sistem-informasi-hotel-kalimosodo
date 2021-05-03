@@ -22,7 +22,7 @@ class CreateReservationTable extends Migration
             $table->date('check_in');
             $table->date('check_out');
             $table->integer('guest');
-            $table->string('description', 30)->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

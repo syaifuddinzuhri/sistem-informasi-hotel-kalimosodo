@@ -55,8 +55,8 @@
                     </div>
                      <div class="form-group mb-3">
                         <label for="description" class="form-label">Deskripsi</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Enter descriptions" value={{$data->description}}
-                            rows="3"></textarea>
+                        <textarea class="form-control" id="description" name="description" placeholder="Enter descriptions"
+                            rows="3">{{$data->description}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Gambar</label> <br>

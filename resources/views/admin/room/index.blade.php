@@ -31,6 +31,7 @@
                                 <th>#</th>
                                 <th>Gambar</th>
                                 <th>Nama</th>
+                                <th>Tipe Kamar</th>
                                 <th>Harga</th>
                                 <th>Status</th>
                                 <th>Aksi</th>

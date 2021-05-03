@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\FacilityController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +22,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home'])->name('home.index');
+Route::get('/blog', [HomeController::class, 'blog'])->name('home.blog');
+Route::get('/rooms', [HomeController::class, 'room'])->name('home.rooms');
+Route::get('/room/{id}', [HomeController::class, 'detailRoom'])->name('home.detail-room');
+Route::get('/facility', [HomeController::class, 'facility'])->name('home.facility');
+Route::get('/about-us', [HomeController::class, 'about'])->name('home.about');
+Route::get('/contact-us', [HomeController::class, 'contact'])->name('home.contact');
+
+Route::get('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
 Route::prefix('admin')->group(function () {

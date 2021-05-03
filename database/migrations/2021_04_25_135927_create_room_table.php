@@ -20,7 +20,7 @@ class CreateRoomTable extends Migration
             $table->string('name', 30);
             $table->float('price');
             $table->string('image');
-            $table->string('description', 30)->nullable();
+            $table->text('description')->nullable();
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

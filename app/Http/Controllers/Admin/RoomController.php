@@ -53,7 +53,7 @@ class RoomController extends Controller
          $payload = $request->only(['name', 'description', 'room_type_id', 'price']);
         $payload['is_active'] = $request->is_active == "on" ? 1 : 0;
         if($request->hasFile('image')){
-			$payload['image'] = uploadFoto($request->file('image'), 'image');
+			$payload['image'] = uploadFoto($request->file('image'), 'room');
         }
         $this->model->create($payload);
         return redirect()->route('room.index');
@@ -97,7 +97,7 @@ class RoomController extends Controller
         $payload['is_active'] = $request->is_active == "on" ? 1 : 0;
         $room = Room::findOrFail($id);
 		if($request->hasFile('image')){
-            $payload['image'] = updateFoto($room->image, 'image', $request->file('image'), 'image');
+            $payload['image'] = updateFoto($room->image, 'room', $request->file('image'), 'room');
         }else{
             $payload['image'] = $room->image;
         }
@@ -118,9 +118,12 @@ class RoomController extends Controller
     }
 
     public function room(){
-        $data = $this->model->all();
+        $data = $this->model->with('room_type')->get();
         return datatables()->of($data)
             ->addIndexColumn()
+            ->editColumn('room_type', function($data){
+                return $data->room_type->name;
+            })
             ->addColumn('action', function ($data) {
                 $update = '<a href="'. route('room.edit', $data->id). '" class="btn-edit-room"><span class="badge bg-success">
                 <i class="fas fa-edit"></i>
@@ -133,7 +136,7 @@ class RoomController extends Controller
                 ';
                 return $update;
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'room_type'])
             ->make(true);
     }
 }
