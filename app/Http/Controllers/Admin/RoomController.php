@@ -50,7 +50,8 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
-        $payload = $request->all();
+         $payload = $request->only(['name', 'description', 'room_type_id', 'price']);
+        $payload['is_active'] = $request->is_active == "on" ? 1 : 0;
         if($request->hasFile('image')){
 			$payload['image'] = uploadFoto($request->file('image'), 'image');
         }

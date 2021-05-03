@@ -35,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon blue">
-                                            <i class="iconly-boldProfile"></i>
+                                            <i class="fa fa-person-booth text-white"></i>
                                         </div>
                                     </div>
                                     <div class="col-md-8">

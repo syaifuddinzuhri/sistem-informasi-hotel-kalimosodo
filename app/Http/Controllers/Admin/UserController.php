@@ -97,11 +97,8 @@ class UserController extends Controller
         return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-                $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-user"
-                data-bs-target="#editUserModal"
-                data-id="'. $data->id .'"><span class="badge bg-success">
-                <i class="fas fa-edit"></i>
-            </span></a>
+
+                $update = '
             <a href="#" data-bs-toggle="modal" class="btn-delete-user"
                 data-bs-target="#deleteUserModal"
                 data-id="'. $data->id .'"><span class="badge bg-danger">
