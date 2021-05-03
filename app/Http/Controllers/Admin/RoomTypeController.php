@@ -105,13 +105,16 @@ class RoomTypeController extends Controller
         return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-                $update = '<a class="btn btn-primary btn-xs modal-edit-room-type" href="#" data-toggle="modal" data-target="#exampleModalCenter"
-                data-id="'. $data->id .'">Edit</a>
-                    <form style="display: inline-block;" method="POST" action=" '.route('room-type.destroy', $data->id).'" class="hapus" data-room-type="'.$data->name.'">
-                    '. method_field('delete'). '
-                    <input type="hidden" name="_token" value="'.csrf_token().'">
-                    <a href="#" class="btn btn-danger btn-xs">Hapus</a>                   
-                </form>
+            $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-room-type"
+                data-bs-target="#editRoomTypeModal"
+                data-id="'. $data->id .'"><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>
+            <a href="#" data-bs-toggle="modal" class="btn-delete-room-type"
+                data-bs-target="#deleteRoomTypeModal"
+                data-id="'. $data->id .'"><span class="badge bg-danger">
+                <i class="fas fa-trash"></i>
+            </span></a>
                 ';
                 return $update;
             })

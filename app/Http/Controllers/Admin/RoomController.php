@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Repositories\Repository;
 use App\Http\Requests\RoomRequest;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
+
+use function App\Helpers\updateFoto;
+use function App\Helpers\uploadFoto;
 
 class RoomController extends Controller
 {
@@ -34,7 +38,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        //
+        $room_type = RoomType::where('is_active', 1)->get();
+        return view('admin.room.create', compact('room_type'));
     }
 
     /**
@@ -50,7 +55,7 @@ class RoomController extends Controller
 			$payload['image'] = uploadFoto($request->file('image'), 'image');
         }
         $this->model->create($payload);
-        return response()->json(['success' => true], 201);
+        return redirect()->route('room.index');
     }
 
     /**
@@ -73,8 +78,9 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
+        $room_type = RoomType::where('is_active', 1)->get();
         $data = $this->model->getModel()::findOrFail($id);
-        return response()->json(['success' => true, 'data' => $data], 200);
+        return view('admin.room.edit', compact('data', 'room_type'));
     }
 
     /**
@@ -86,15 +92,16 @@ class RoomController extends Controller
      */
     public function update(RoomRequest $request, $id)
     {
-        $payload = $request->all();
+        $payload = $request->only(['name', 'description', 'room_type_id', 'price']);
+        $payload['is_active'] = $request->is_active == "on" ? 1 : 0;
         $room = Room::findOrFail($id);
 		if($request->hasFile('image')){
-            $payload['image'] = updateFoto($room->image_gudang, 'image', $request->file('image'), 'image');
+            $payload['image'] = updateFoto($room->image, 'image', $request->file('image'), 'image');
         }else{
             $payload['image'] = $room->image;
         }
         $room->update($payload);
-        return response()->json(['success' => true], 200);
+        return redirect()->route('room.index');
     }
 
     /**
@@ -114,9 +121,7 @@ class RoomController extends Controller
         return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
-                $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-room"
-                data-bs-target="#editRoomModal"
-                data-id="'. $data->id .'"><span class="badge bg-success">
+                $update = '<a href="'. route('room.edit', $data->id). '" class="btn-edit-room"><span class="badge bg-success">
                 <i class="fas fa-edit"></i>
             </span></a>
             <a href="#" data-bs-toggle="modal" class="btn-delete-room"

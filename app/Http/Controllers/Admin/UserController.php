@@ -88,7 +88,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return response()->json(['success' => true], 200);
     }
 
     public function user(){

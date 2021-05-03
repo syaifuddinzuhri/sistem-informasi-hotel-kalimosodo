@@ -8,25 +8,25 @@
 
 @section('content')
 <div class="page-heading">
-    <h3>Fasilitas</h3>
+    <h3>Tipe Kamar</h3>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Fasilitas</li>
+            <li class="breadcrumb-item active" aria-current="page">Tipe Kamar</li>
         </ol>
     </nav>
 </div>
 <div class="page-content" style="min-height: 80vh">
     <section class="row">
         <div class="col-12">
-            <button class="btn btn-primary mb-4" id="btn-add-facility" data-bs-toggle="modal"
-            data-bs-target="#addFacilityModal"><i class="fas fa-plus"></i>Tambah Fasilitas</button>
+            <button class="btn btn-primary mb-4" id="btn-add-room-type" data-bs-toggle="modal"
+            data-bs-target="#addRoomTypeModal"><i class="fas fa-plus"></i>Tambah Tipe Kamar</button>
             <div class="card shadow rounded">
                 <div class="card-header">
-                    <h5 class="m-0 card-title">Data Fasilitas</h5>
+                    <h5 class="m-0 card-title">Data Tipe Kamar</h5>
                 </div>
                 <div class="card-body">
-                    <table id="table_facility" class="table table-bordered table-striped">
+                    <table id="table_room_type" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -47,19 +47,19 @@
 
 @section('modal')
 
-{{-- Add Facility Modal --}}
-<div class="modal fade text-left" id="addFacilityModal" tabindex="-1" role="dialog" aria-hidden="true">
+{{-- Add room-type Modal --}}
+<div class="modal fade text-left" id="addRoomTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Tambah Fasilitas</h4>
+                <h4 class="modal-title">Tambah Tipe Kamar</h4>
                 <button type="button" class="close" data-bs-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="formAddFacility" method="POST">
+            <form id="formAddRoomType" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -94,19 +94,19 @@
     </div>
 </div>
 
-{{-- Edit Facility Modal --}}
-<div class="modal fade text-left" id="editFacilityModal" tabindex="-1" role="dialog" aria-hidden="true">
+{{-- Edit room-type Modal --}}
+<div class="modal fade text-left" id="editRoomTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Edit Facility</h4>
+                <h4 class="modal-title">Edit Tipe Kamar</h4>
                 <button type="button" class="close" data-bs-dismiss="modal"
                     aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="formEditFacility" method="PUT">
+            <form id="formEditRoomType" method="PUT">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -142,12 +142,12 @@
 </div>
 
 {{-- Delete Modal --}}
-<div class="modal fade text-left" id="deleteFacilityModal" tabindex="-1" role="dialog"
-aria-labelledby="modal-title-delete-facility" aria-hidden="true">
+<div class="modal fade text-left" id="deleteRoomTypeModal" tabindex="-1" role="dialog"
+aria-labelledby="modal-title-delete-room-type" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="modal-title-delete-facility">Konfirmasi Hapus</h5>
+            <h5 class="modal-title" id="modal-title-delete-room-type">Konfirmasi Hapus</h5>
             <button type="button" class="close rounded-pill"
                 data-bs-dismiss="modal" aria-label="Close">
                 <i data-feather="x"></i>
@@ -164,7 +164,7 @@ aria-labelledby="modal-title-delete-facility" aria-hidden="true">
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 Loading...
             </button>
-            <form id="formDeleteFacility" class="d-inline" method="POST">
+            <form id="formDeleteRoomType" class="d-inline" method="POST">
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
                 <button id="deleteKategori" type="submit" class="btn btn-danger ml-1 btn-submit">
@@ -185,5 +185,5 @@ aria-labelledby="modal-title-delete-facility" aria-hidden="true">
     <script src="{{ asset('admin-templates') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
     <script src="{{ asset('admin-templates') }}/plugins/jquery-validation/additional-methods.min.js"></script>
     <script src="{{ asset('admin-templates') }}/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="{{ asset('js/facility.js') }}" type="module"></script>
+    <script src="{{ asset('js/room-type.js') }}" type="module"></script>
 @endsection

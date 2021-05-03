@@ -31,6 +31,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{Request::is('admin/room-type') ? 'active' : ''}}">
+                    <a href="{{ route('room-type.index') }}" class='sidebar-link'>
+                        <i class="fas fa-fw fa-person-booth"></i>
+                        <span>Tipe Kamar</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item {{Request::is('admin/room') ? 'active' : ''}}">
                     <a href="{{ route('room.index') }}" class='sidebar-link'>
                         <i class="fas fa-fw fa-person-booth"></i>

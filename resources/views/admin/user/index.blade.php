@@ -19,8 +19,8 @@
 <div class="page-content" style="min-height: 80vh">
     <section class="row">
         <div class="col-12">
-            <button class="btn btn-primary mb-4" id="btn-add-user" data-bs-toggle="modal"
-            data-bs-target="#addUserModal"><i class="fas fa-plus"></i>Tambah User</button>
+            {{-- <button class="btn btn-primary mb-4" id="btn-add-user" data-bs-toggle="modal"
+            data-bs-target="#addUserModal"><i class="fas fa-plus"></i>Tambah User</button> --}}
             <div class="card shadow rounded">
                 <div class="card-header">
                     <h5 class="m-0 card-title">Data Users</h5>
@@ -43,6 +43,42 @@
             </div>
         </div>
     </section>
+</div>
+@endsection
+
+@section('modal')
+    <div class="modal fade text-left" id="deleteUserModal" tabindex="-1" role="dialog"
+aria-labelledby="modal-title-delete-user" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modal-title-delete-user">Konfirmasi Hapus</h5>
+            <button type="button" class="close rounded-pill"
+                data-bs-dismiss="modal" aria-label="Close">
+                <i data-feather="x"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                Apakah kamu yakin akan menghapus data ini?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn" data-bs-dismiss="modal">Kembali</button>
+            <button class="btn btn-danger btn-loading" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+            </button>
+            <form id="formDeleteUser" class="d-inline" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+                <button id="deleteUser" type="submit" class="btn btn-danger ml-1 btn-submit">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 </div>
 @endsection
 

@@ -23,13 +23,20 @@ class RoomRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'room_type_id'  => 'required',
-            'name'          => 'required',
-            'price'         => 'required',
-            'image'         => 'required',
-            'is_active'     => 'required',
-        ];
+        if($this->isMethod('POST')){
+            return [
+                'room_type_id'  => 'required',
+                'name'          => 'required',
+                'price'         => 'required',
+                'image'         => 'required',
+            ];
+        } else if ($this->isMethod('PUT')){
+            return [
+                'room_type_id'  => 'required',
+                'name'          => 'required',
+                'price'         => 'required',
+            ];
+        }
     }
 
     public function messages()
@@ -39,7 +46,6 @@ class RoomRequest extends FormRequest
             'name.required'         => 'nama kamar tidak boleh kosong',
             'price.required'        => 'harga kamar tidak boleh kosong',
             'image.required'        => 'image kamar tidak boleh kosong',
-            'is_active.required'    => 'aktivasi kamar tidak boleh kosong',
         ];
     }
 }

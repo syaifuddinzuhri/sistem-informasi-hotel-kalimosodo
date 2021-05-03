@@ -6,6 +6,6 @@ $(document).ready(function () {
 
     if (pathURL == "/admin/user" || pathURL == "/admin/user/") {
         user.dataTable();
+        user.deleteUser();
     }
-
 });

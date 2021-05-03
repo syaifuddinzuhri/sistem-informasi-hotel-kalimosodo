@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     if (pathURL == "/admin/room" || pathURL == "/admin/room/") {
         room.dataTable();
+        // room.getRoomType();
+        // room.storeRoom();
     }
-
 });

@@ -17,7 +17,7 @@ class CreateFacilityTable extends Migration
             $table->id();
             $table->string('name', 30);
             $table->string('description', 30)->nullable();
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

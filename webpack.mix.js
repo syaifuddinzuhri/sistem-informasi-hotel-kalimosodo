@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -12,11 +12,12 @@ const mix = require('laravel-mix');
  */
 
 // mix.js('resources/js/app.js', 'public/js');
-    // .postCss('resources/css/app.css', 'public/css', [
-    //     //
-    // ]);
+// .postCss('resources/css/app.css', 'public/css', [
+//     //
+// ]);
 
-    mix.js("resources/js/facility.js", "public/js").sourceMaps();
-    mix.js("resources/js/room.js", "public/js").sourceMaps();
-    mix.js("resources/js/user.js", "public/js").sourceMaps();
-    mix.js("resources/js/blog.js", "public/js").sourceMaps();
+mix.js("resources/js/facility.js", "public/js").sourceMaps();
+mix.js("resources/js/room.js", "public/js").sourceMaps();
+mix.js("resources/js/user.js", "public/js").sourceMaps();
+mix.js("resources/js/blog.js", "public/js").sourceMaps();
+mix.js("resources/js/room-type.js", "public/js").sourceMaps();

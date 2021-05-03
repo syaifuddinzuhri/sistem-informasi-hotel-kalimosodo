@@ -1,4 +1,8 @@
-<?php 
+<?php
+
+namespace App\Helpers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 function uploadFoto($nama, $upload){
     $foto = $nama;
@@ -16,7 +20,7 @@ function updateFoto($data, $namaFile, $input, $upload){
     $exist = Storage::disk($namaFile)->exists($data);
     if(isset($data) && $exist){
         $delete = Storage::disk($namaFile)->delete($data);
-    }        
+    }
     $foto = $input;
     $ext = $foto->getClientOriginalExtension();
     if($input->isValid()){
@@ -54,13 +58,13 @@ function tgl_indo($tanggal){
 		1 =>   'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'
 	);
 	$pecahkan = explode('-', $tanggal);
- 
+
 	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
 }
 
 function rupiah($angka){
-	
+
 	$hasil_rupiah = "Rp " . number_format($angka,2,',','.');
 	return $hasil_rupiah;
- 
+
 }

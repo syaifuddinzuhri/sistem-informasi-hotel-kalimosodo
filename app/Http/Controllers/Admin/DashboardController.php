@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\Facility;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,7 +18,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard.index');
+        $room = Room::count();
+        $facility = Facility::count();
+        $user = User::count();
+        $blog = Blog::count();
+        return view('admin.dashboard.index', compact('user', 'blog', 'room', 'facility'));
     }
 
     /**

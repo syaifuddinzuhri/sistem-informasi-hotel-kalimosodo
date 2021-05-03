@@ -16,9 +16,9 @@ class CreateBlogTable extends Migration
         Schema::create('blog', function (Blueprint $table) {
             $table->id();
             $table->string('title', 30);
-            $table->string('content', 30);
-            $table->string('image', 50);
-            $table->boolean('is_active');
+            $table->text('content');
+            $table->string('image');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

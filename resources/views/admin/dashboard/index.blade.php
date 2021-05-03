@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">User</h6>
-                                        <h6 class="font-extrabold mb-0">500</h6>
+                                        <h6 class="font-extrabold mb-0">{{$user}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Kamar</h6>
-                                        <h6 class="font-extrabold mb-0">100</h6>
+                                        <h6 class="font-extrabold mb-0">{{$room}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Fasilitas</h6>
-                                        <h6 class="font-extrabold mb-0">120</h6>
+                                        <h6 class="font-extrabold mb-0">{{$facility}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <h6 class="text-muted font-semibold">Blog</h6>
-                                        <h6 class="font-extrabold mb-0">40</h6>
+                                        <h6 class="font-extrabold mb-0">{{$blog}}</h6>
                                     </div>
                                 </div>
                             </div>

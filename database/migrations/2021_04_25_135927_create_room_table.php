@@ -19,9 +19,9 @@ class CreateRoomTable extends Migration
             $table->foreign('room_type_id')->references('id')->on('room_type');
             $table->string('name', 30);
             $table->float('price');
-            $table->string('image', 50);
+            $table->string('image');
             $table->string('description', 30)->nullable();
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

@@ -1,15 +1,14 @@
 import { handle } from "./handle_module";
-class Facility{
-
-    dataTable(){
-        handle.setup()
-        $("#table_facility").DataTable({
+class RoomType {
+    dataTable() {
+        handle.setup();
+        $("#table_room_type").DataTable({
             responsive: true,
             autoWidth: false,
             processing: true,
             serverSide: true,
             ajax: {
-                url: APP_URL + "/api/data-facility",
+                url: APP_URL + "/api/data-room-type",
             },
             columns: [
                 {
@@ -30,7 +29,7 @@ class Facility{
                     data: "is_active",
                     render: function (data) {
                         if (data == 1) {
-                            return "<span class='badge bg-light-success'>Active</span>"
+                            return "<span class='badge bg-light-success'>Active</span>";
                         } else {
                             return "<span class='badge bg-light-danger'>Non Active</span>";
                         }
@@ -47,19 +46,18 @@ class Facility{
         });
     }
 
-    storeFacility() {
+    storeRoomType() {
         handle.setup();
         var isActive = 0;
-        $("#is_active").on('change', function() {
-            $(this).is(':checked') ? isActive = 1 : isActive = 0;
-
+        $("#is_active").on("change", function () {
+            $(this).is(":checked") ? (isActive = 1) : (isActive = 0);
         });
-        $("#formAddFacility").validate({
+        $("#formAddRoomType").validate({
             rules: {
                 name: { required: true },
             },
             messages: {
-                name: { required: "Nama fasilitas tidak boleh kosong" },
+                name: { required: "Nama tipe kamar tidak boleh kosong" },
             },
             errorElement: "span",
             errorPlacement: (error, element) => {
@@ -76,30 +74,30 @@ class Facility{
                 var data = {
                     name: $("#name").val(),
                     description: $("#description").val(),
-                    is_active: isActive
+                    is_active: isActive,
                 };
                 $.ajax({
                     type: "POST",
-                    url: APP_URL + "/admin/facility",
+                    url: APP_URL + "/admin/room-type",
                     data: data,
                     beforeSend: function () {
-                        $("#formAddFacility .btn-loading").show();
-                        $("#formAddFacility .btn-submit").hide();
+                        $("#formAddRoomType .btn-loading").show();
+                        $("#formAddRoomType .btn-submit").hide();
                     },
                     success: function (res) {
-                        $("#formAddFacility .btn-loading").hide();
-                        $("#formAddFacility .btn-submit").show();
-                        $("#table_facility").DataTable().ajax.reload();
-                        $("#formAddFacility")[0].reset();
-                        $("#addFacilityModal").modal("hide")
+                        $("#formAddRoomType .btn-loading").hide();
+                        $("#formAddRoomType .btn-submit").show();
+                        $("#table_room_type").DataTable().ajax.reload();
+                        $("#formAddRoomType")[0].reset();
+                        $("#addRoomTypeModal").modal("hide");
                         Swal.fire({
                             icon: "success",
-                            title: "Success"
-                        })
+                            title: "Success",
+                        });
                     },
                     error: (e, x, settings, exception) => {
-                        $("#formAddFacility .btn-loading").hide();
-                        $("#formAddFacility .btn-submit").show();
+                        $("#formAddRoomType .btn-loading").hide();
+                        $("#formAddRoomType .btn-submit").show();
                         handle.errorhandle(e, x, settings, exception);
                     },
                 });
@@ -107,31 +105,33 @@ class Facility{
         });
     }
 
-    editFacility() {
+    editRoomType() {
         handle.setup();
         var id = "";
         var isActive = 0;
 
-        $("#table_facility").on("click", ".btn-edit-facility", function () {
-            $("#formEditFacility")[0].reset();
-            id = $(this).attr('data-id');
-            $.get(`${APP_URL}/admin/facility/${id}/edit`, function(res){
+        $("#table_room_type").on("click", ".btn-edit-room-type", function () {
+            $("#formEditRoomType")[0].reset();
+            id = $(this).attr("data-id");
+            $.get(`${APP_URL}/admin/room-type/${id}/edit`, function (res) {
                 $("#name_edit").val(res.data.name);
                 $("#description_edit").val(res.data.description);
-                res.data.is_active == 1 ? $("#is_active_edit").attr("checked", true) : $("#is_active_edit").attr("checked", false);
-                isActive = res.data.is_active
-            })
+                res.data.is_active == 1
+                    ? $("#is_active_edit").attr("checked", true)
+                    : $("#is_active_edit").attr("checked", false);
+                isActive = res.data.is_active;
+            });
         });
-        $("#is_active_edit").on('change', function() {
-            $(this).is(':checked') ? isActive = 1 : isActive = 0;
+        $("#is_active_edit").on("change", function () {
+            $(this).is(":checked") ? (isActive = 1) : (isActive = 0);
         });
 
-        $("#formEditFacility").validate({
+        $("#formEditRoomType").validate({
             rules: {
                 name: { required: true },
             },
             messages: {
-                name: { required: "Nama fasilitas tidak boleh kosong" },
+                name: { required: "Nama tipe kamar tidak boleh kosong" },
             },
             errorElement: "span",
             errorPlacement: (error, element) => {
@@ -148,30 +148,30 @@ class Facility{
                 var data = {
                     name: $("#name_edit").val(),
                     description: $("#description_edit").val(),
-                    is_active: isActive
+                    is_active: isActive,
                 };
                 $.ajax({
                     type: "PUT",
-                    url: APP_URL + "/admin/facility/" + id,
+                    url: APP_URL + "/admin/room-type/" + id,
                     data: data,
                     beforeSend: function () {
-                        $("#formEditFacility .btn-loading").show();
-                        $("#formEditFacility .btn-submit").hide();
+                        $("#formEditRoomType .btn-loading").show();
+                        $("#formEditRoomType .btn-submit").hide();
                     },
                     success: function (res) {
-                        $("#formEditFacility .btn-loading").hide();
-                        $("#formEditFacility .btn-submit").show();
-                        $("#table_facility").DataTable().ajax.reload();
-                        $("#formEditFacility")[0].reset();
-                        $("#editFacilityModal").modal("hide")
+                        $("#formEditRoomType .btn-loading").hide();
+                        $("#formEditRoomType .btn-submit").show();
+                        $("#table_room_type").DataTable().ajax.reload();
+                        $("#formEditRoomType")[0].reset();
+                        $("#editRoomTypeModal").modal("hide");
                         Swal.fire({
                             icon: "success",
-                            title: "Success"
-                        })
+                            title: "Success",
+                        });
                     },
                     error: (e, x, settings, exception) => {
-                        $("#formEditFacility .btn-loading").hide();
-                        $("#formEditFacility .btn-submit").show();
+                        $("#formEditRoomType .btn-loading").hide();
+                        $("#formEditRoomType .btn-submit").show();
                         handle.errorhandle(e, x, settings, exception);
                     },
                 });
@@ -179,38 +179,38 @@ class Facility{
         });
     }
 
-    deleteFacility() {
+    deleteRoomType() {
         handle.setup();
         var id = "";
-        $("#table_facility").on("click", ".btn-delete-facility", function () {
-            id = $(this).attr('data-id');
+        $("#table_room_type").on("click", ".btn-delete-room-type", function () {
+            id = $(this).attr("data-id");
         });
-        $("#formDeleteFacility").on("submit", function (e) {
-            var url = APP_URL + "/admin/facility/" + id
+        $("#formDeleteRoomType").on("submit", function (e) {
+            var url = APP_URL + "/admin/room-type/" + id;
             var form = $(this);
             $.ajax({
                 url: url,
                 type: "DELETE",
                 data: form.serialize(),
                 beforeSend: function () {
-                    $("#deleteFacilityModal .btn-loading").show();
-                    $("#deleteFacilityModal .btn-submit").hide();
+                    $("#deleteRoomTypeModal .btn-loading").show();
+                    $("#deleteRoomTypeModal .btn-submit").hide();
                 },
                 success: function (res) {
-                    $("#deleteFacilityModal .btn-loading").hide();
-                    $("#deleteFacilityModal .btn-submit").show();
+                    $("#deleteRoomTypeModal .btn-loading").hide();
+                    $("#deleteRoomTypeModal .btn-submit").show();
                     if (res) {
-                        $("#table_facility").DataTable().ajax.reload();
-                        $("#deleteFacilityModal").modal("hide");
+                        $("#table_room_type").DataTable().ajax.reload();
+                        $("#deleteRoomTypeModal").modal("hide");
                         Swal.fire({
                             icon: "success",
-                            title: "Success"
-                        })
+                            title: "Success",
+                        });
                     }
                 },
                 error: (e, x, settings, exception) => {
-                    $("#deleteFacilityModal .btn-loading").hide();
-                    $("#deleteFacilityModal .btn-submit").show();
+                    $("#deleteRoomTypeModal .btn-loading").hide();
+                    $("#deleteRoomTypeModal .btn-submit").show();
                     var msg = "Hapus data gagal ";
                     handle.errorhandle(e, x, settings, exception, msg);
                 },
@@ -218,7 +218,6 @@ class Facility{
             e.preventDefault();
         });
     }
-
 }
 
-export const facility = new Facility();
+export const room_type = new RoomType();
