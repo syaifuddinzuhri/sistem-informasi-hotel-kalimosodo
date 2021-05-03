@@ -14,6 +14,7 @@ class Room extends Model
         'room_type_id',
         'name',
         'price',
+        'image',
         'description',
         'is_active'
     ];
