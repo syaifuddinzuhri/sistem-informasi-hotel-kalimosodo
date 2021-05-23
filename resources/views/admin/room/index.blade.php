@@ -49,48 +49,46 @@
 @section('modal')
 
 {{-- Delete Modal --}}
-<div class="modal fade text-left" id="deleteRoomModal" tabindex="-1" role="dialog"
-aria-labelledby="modal-title-delete-room" aria-hidden="true">
-<div class="modal-dialog modal-dialog-scrollable" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modal-title-delete-room">Konfirmasi Hapus</h5>
-            <button type="button" class="close rounded-pill"
-                data-bs-dismiss="modal" aria-label="Close">
-                <i data-feather="x"></i>
-            </button>
-        </div>
-        <div class="modal-body">
-            <p>
-                Apakah kamu yakin akan menghapus data ini?
-            </p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn" data-bs-dismiss="modal">Kembali</button>
-            <button class="btn btn-danger btn-loading" type="button" disabled>
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                Loading...
-            </button>
-            <form id="formDeleteRoom" class="d-inline" method="POST">
-                {{ csrf_field() }}
-                {{ method_field('DELETE') }}
-                <button id="deleteKategori" type="submit" class="btn btn-danger ml-1 btn-submit">
-                    Delete
+<div class="modal fade text-left" id="deleteRoomModal" tabindex="-1" role="dialog" aria-labelledby="modal-title-delete-room" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-title-delete-room">Konfirmasi Hapus</h5>
+                <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
                 </button>
-            </form>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Apakah kamu yakin akan menghapus data ini?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal">Kembali</button>
+                <button class="btn btn-danger btn-loading" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                </button>
+                <form id="formDeleteRoom" class="d-inline" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <button id="deleteKategori" type="submit" class="btn btn-danger ml-1 btn-submit">
+                        Delete
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
 
 @section('script')
-    <script src="{{ asset('admin-templates') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('admin-templates') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('admin-templates') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('admin-templates') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="{{ asset('admin-templates') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="{{ asset('admin-templates') }}/plugins/jquery-validation/additional-methods.min.js"></script>
-    <script src="{{ asset('admin-templates') }}/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="{{ asset('js/room.js') }}" type="module"></script>
+<script src="{{ asset('admin-templates') }}/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="{{ asset('admin-templates') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('admin-templates') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('admin-templates') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="{{ asset('admin-templates') }}/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="{{ asset('admin-templates') }}/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="{{ asset('admin-templates') }}/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="{{ asset('js/room.js') }}" type="module"></script>
 @endsection

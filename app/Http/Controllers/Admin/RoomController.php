@@ -7,8 +7,10 @@ use App\Models\Room;
 use App\Repositories\Repository;
 use App\Http\Requests\RoomRequest;
 use App\Models\RoomType;
+use App\Models\Facility;
 use Illuminate\Http\Request;
 
+use function App\Helpers\deleteFoto;
 use function App\Helpers\updateFoto;
 use function App\Helpers\uploadFoto;
 
@@ -38,8 +40,9 @@ class RoomController extends Controller
      */
     public function create()
     {
+        $fasilitas = Facility::where('is_active', 1)->get();
         $room_type = RoomType::where('is_active', 1)->get();
-        return view('admin.room.create', compact('room_type'));
+        return view('admin.room.create', compact('room_type', 'fasilitas'));
     }
 
     /**
@@ -50,12 +53,13 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
-         $payload = $request->only(['name', 'description', 'room_type_id', 'price']);
+        $payload = $request->only(['name', 'description', 'room_type_id', 'price']);
         $payload['is_active'] = $request->is_active == "on" ? 1 : 0;
-        if($request->hasFile('image')){
-			$payload['image'] = uploadFoto($request->file('image'), 'room');
+        if ($request->hasFile('image')) {
+            $payload['image'] = uploadFoto($request->file('image'), 'room');
         }
-        $this->model->create($payload);
+        $room = $this->model->create($payload);
+        if ($request->fasilitas) $room->facilities()->sync($request->fasilitas);
         return redirect()->route('room.index');
     }
 
@@ -79,9 +83,10 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
+        $fasilitas = Facility::where('is_active', 1)->get();
         $room_type = RoomType::where('is_active', 1)->get();
-        $data = $this->model->getModel()::findOrFail($id);
-        return view('admin.room.edit', compact('data', 'room_type'));
+        $data = Room::with('facilities')->where('id', $id)->first();
+        return view('admin.room.edit', compact('data', 'room_type', 'fasilitas'));
     }
 
     /**
@@ -96,12 +101,13 @@ class RoomController extends Controller
         $payload = $request->only(['name', 'description', 'room_type_id', 'price']);
         $payload['is_active'] = $request->is_active == "on" ? 1 : 0;
         $room = Room::findOrFail($id);
-		if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $payload['image'] = updateFoto($room->image, 'room', $request->file('image'), 'room');
-        }else{
+        } else {
             $payload['image'] = $room->image;
         }
         $room->update($payload);
+        if ($request->fasilitas) $room->facilities()->sync($request->fasilitas);
         return redirect()->route('room.index');
     }
 
@@ -113,24 +119,30 @@ class RoomController extends Controller
      */
     public function destroy($id)
     {
+        $room = Room::with('facilities')->findOrFail($id);
+        if ($room->image) {
+            deleteFoto($room->image, 'room');
+        }
+        if ($room->facilities) $room->facilities()->detach();
         $this->model->delete($id);
-        return response()->json(['success' => true], 200);
+        return response()->json(['success' => $room], 200);
     }
 
-    public function room(){
+    public function room()
+    {
         $data = $this->model->with('room_type')->get();
         return datatables()->of($data)
             ->addIndexColumn()
-            ->editColumn('room_type', function($data){
+            ->editColumn('room_type', function ($data) {
                 return $data->room_type->name;
             })
             ->addColumn('action', function ($data) {
-                $update = '<a href="'. route('room.edit', $data->id). '" class="btn-edit-room"><span class="badge bg-success">
+                $update = '<a href="' . route('room.edit', $data->id) . '" class="btn-edit-room"><span class="badge bg-success">
                 <i class="fas fa-edit"></i>
             </span></a>
             <a href="#" data-bs-toggle="modal" class="btn-delete-room"
                 data-bs-target="#deleteRoomModal"
-                data-id="'. $data->id .'"><span class="badge bg-danger">
+                data-id="' . $data->id . '"><span class="badge bg-danger">
                 <i class="fas fa-trash"></i>
             </span></a>
                 ';
@@ -138,5 +150,15 @@ class RoomController extends Controller
             })
             ->rawColumns(['action', 'room_type'])
             ->make(true);
+    }
+
+    public function getRoomHasFacilites($id)
+    {
+        $room = Room::with('facilities')->findOrFail($id);
+        $facilities = [];
+        foreach ($room->facilities as $fac) {
+            $facilities[] = $fac->pivot->facility_id;
+        }
+        return response()->json($facilities);
     }
 }

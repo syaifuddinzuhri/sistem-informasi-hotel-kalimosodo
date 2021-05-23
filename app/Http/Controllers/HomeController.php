@@ -34,7 +34,7 @@ class HomeController extends Controller
     public function detailRoom($id)
     {
         Session::put('nav', 3);
-        $room = Room::with('room_type', 'room_has_facility')->findOrFail($id);
+        $room = Room::with('room_type', 'facilities')->findOrFail($id);
         return view('user.detail-room', compact('room'));
     }
 

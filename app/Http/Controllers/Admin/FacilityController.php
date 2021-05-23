@@ -101,19 +101,20 @@ class FacilityController extends Controller
         return response()->json(['success' => true], 200);
     }
 
-    public function facility(){
+    public function facility()
+    {
         $data = $this->model->all();
         return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-facility"
                 data-bs-target="#editFacilityModal"
-                data-id="'. $data->id .'"><span class="badge bg-success">
+                data-id="' . $data->id . '"><span class="badge bg-success">
                 <i class="fas fa-edit"></i>
             </span></a>
             <a href="#" data-bs-toggle="modal" class="btn-delete-facility"
                 data-bs-target="#deleteFacilityModal"
-                data-id="'. $data->id .'"><span class="badge bg-danger">
+                data-id="' . $data->id . '"><span class="badge bg-danger">
                 <i class="fas fa-trash"></i>
             </span></a>
                 ';

@@ -19,11 +19,12 @@ class Room extends Model
         'is_active'
     ];
 
-    public function room_type(){
+    public function room_type()
+    {
         return $this->belongsTo('App\Models\RoomType', 'room_type_id');
     }
 
-    public function room_has_facility()
+    public function facilities()
     {
         return $this->belongsToMany(Facility::class, 'room_has_facility', 'room_id', 'facility_id');
     }

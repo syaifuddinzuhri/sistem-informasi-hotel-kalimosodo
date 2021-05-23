@@ -184,6 +184,57 @@ class Room {
             },
         });
     }
+
+    showFacilities(id) {
+        handle.setup();
+        $.get(`${APP_URL}/api/room-has-facilities/${id}`, function (res) {
+            $.each(res, function (i, e) {
+                $("#fasilitas option[value='" + e + "']")
+                    .prop("selected", true)
+                    .trigger("change");
+            });
+        })
+    }
+
+    deleteRoom() {
+        handle.setup();
+        var id = "";
+        $("#table_room").on("click", ".btn-delete-room", function () {
+            id = $(this).attr("data-id");
+        });
+        $("#formDeleteRoom").on("submit", function (e) {
+            var url = APP_URL + "/admin/room/" + id;
+            var form = $(this);
+            $.ajax({
+                url: url,
+                type: "DELETE",
+                data: form.serialize(),
+                beforeSend: function () {
+                    $("#deleteRoomModal .btn-loading").show();
+                    $("#deleteRoomModal .btn-submit").hide();
+                },
+                success: function (res) {
+                    $("#deleteRoomModal .btn-loading").hide();
+                    $("#deleteRoomModal .btn-submit").show();
+                    if (res) {
+                        $("#table_room").DataTable().ajax.reload();
+                        $("#deleteRoomModal").modal("hide");
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                        });
+                    }
+                },
+                error: (e, x, settings, exception) => {
+                    $("#deleteRoomModal .btn-loading").hide();
+                    $("#deleteRoomModal .btn-submit").show();
+                    var msg = "Hapus data gagal ";
+                    handle.errorhandle(e, x, settings, exception, msg);
+                },
+            });
+            e.preventDefault();
+        });
+    }
 }
 
 export const room = new Room();
