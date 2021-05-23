@@ -11,8 +11,8 @@
             <div class="col text-center">
                 <nav aria-label="breadcrumb" data-aos="fade-right">
                     <ol class="breadcrumb bg-transparent m-0">
-                        <li class="breadcrumb-item"><a href="{{ route('home.index')}}"><i class="fa fa-home"></i> Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('home.rooms')}}">Rooms</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home.index')}}"><i class="fa fa-home"></i> Beranda</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home.rooms')}}">Kamar</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $room->name}}</li>
                     </ol>
                 </nav>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-4 text-right">
                         <h5 class="m-0 font-weight-bold text-primary" data-aos="fade-left">Rp. {{$room->price}}
-                            <sub class="font-weight-normal">/a night</sub>
+                            <sub class="font-weight-normal">/malam</sub>
                         </h5>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     <div class="row">
                         @if ($room->facilities->isEmpty())
                         <div class="alert alert-danger">
-                            Data not found.
+                            Data tidak ditemukan.
                         </div>
                         @else
                         @foreach ($room->facilities as $fac)
@@ -69,14 +69,14 @@
             <div class="col-md-4" data-aos="fade-up">
                 <div class="card rounded">
                     <div class="card-header text-center">
-                        <h5 class="card-title m-0">Reservation</h5>
+                        <h5 class="card-title m-0">Pemesanan Kamar</h5>
                     </div>
                     <div class="card-body">
                         <div class="card mb-3">
                             <div class="card-body text-center">
                                 <h5 class="card-title mb-1">{{$room->name}}</h5>
                                 <h5 class="m-0 font-weight-bold text-primary">Rp. {{$room->price}}
-                                    <sub class="font-weight-normal">/a night</sub>
+                                    <sub class="font-weight-normal">/malam</sub>
                                 </h5>
                             </div>
                         </div>
@@ -90,18 +90,18 @@
                                 <input type="date" class="form-control" id="checkout" name="checkout" placeholder="Check-out">
                             </div>
                             <div class="form-group">
-                                <label for="guest">Guest</label>
+                                <label for="guest">Orang</label>
                                 <input type="number" class="form-control" id="guest" name="guest" placeholder="Guest">
                             </div>
                             <div class="card mb-3">
                                 <div class="card-body text-center">
-                                    <h5 class="card-title mb-1 font-weight-bold">TOTAL PRICE</h5>
+                                    <h5 class="card-title mb-1 font-weight-bold">TOTAL HARGA</h5>
                                     <h5 class="m-0 font-weight-bold text-danger">Rp. {{$room->price}}
-                                        <sub class="font-weight-normal">/a night</sub>
+                                        <sub class="font-weight-normal">/malam</sub>
                                     </h5>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100">Book Now</button>
+                            <button type="submit" class="btn btn-primary w-100">Pesan Sekarang</button>
                         </form>
                     </div>
                 </div>

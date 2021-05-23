@@ -4,7 +4,7 @@
             <div class="d-flex justify-content-between">
                 <div class="logo">
                     <a href="#">
-                    Kalimosodo
+                        Kalimosodo
                         {{-- <img src="{{ asset('img/logo.png') }}" alt="Logo" srcset=""> --}}
                     </a>
                 </div>
@@ -67,10 +67,16 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a href="{{ route('dashboard.index') }}" class='sidebar-link'>
+                    <a href="#" onclick="event.preventDefault();
+                        document.getElementById('logout-form2').submit();" class='sidebar-link'>
+
                         <i class="fa fa-fw fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </a>
+                    <form id="logout-form2" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+
                 </li>
 
             </ul>

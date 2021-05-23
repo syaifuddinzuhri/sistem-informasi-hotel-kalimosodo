@@ -7,7 +7,12 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav d-flex justify-content-end w-100">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-sign-out-alt"></i>Logout</span></a>
+                        <a class="nav-link" href="#" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"><i class="fa fa-sign-out-alt"></i>Logout</span></a>
+                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+
                     </li>
                 </ul>
             </div>
