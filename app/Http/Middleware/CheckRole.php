@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
@@ -16,12 +17,18 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->role) {
+        if (Auth::user()->role != 1) {
             if ($request->wantsJson()) {
                 return response()->json(['Message', 'You do not access to this module'], 403);
             }
             abort(403, 'You do not access to this module');
         }
+        // if (!$request->user()->role) {
+        //     if ($request->wantsJson()) {
+        //         return response()->json(['Message', 'You do not access to this module'], 403);
+        //     }
+        //     abort(403, 'You do not access to this module');
+        // }
         return $next($request);
     }
 }

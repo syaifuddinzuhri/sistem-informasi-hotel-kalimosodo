@@ -25,24 +25,24 @@
                 <div class="card shadow" data-aos="fade-up">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md col-6">
-                                <form>
+                            <div class="col-md-3 col-6">
+                                <form action={{route('home.search.room')}} method="POST">
+                                    @csrf
                                     <div class="form-group">
                                         <label for="exampleFormControlInput1">Check-in</label>
-                                        <input type="date" class="form-control" name="checkin" placeholder="Username">
+                                        <input type="date" class="form-control" name="check_in" placeholder="Username">
                                     </div>
                             </div>
-
-                            <div class="col-md col-6">
+                            <div class="col-md-3 col-6">
                                 <div class="form-group">
                                     <label for="checkout">Check-out</label>
-                                    <input type="date" class="form-control" name="checkout" placeholder="name@example.com">
+                                    <input type="date" class="form-control" name="check_out" placeholder="name@example.com">
                                 </div>
                             </div>
-                            <div class="col-md col-6">
+                            <div class="col-md-3 col-12">
                                 <div class="form-group">
                                     <label for="type">Tipe Kamar</label>
-                                    <select class="form-control" name="type">
+                                    <select class="form-control" name="room_type_id">
                                         <option disabled selected>- Pilih Tipe -</option>
                                         @if ($roomType->isEmpty())
                                         <option disabled>Tipe Kosong</option>
@@ -54,18 +54,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md col-6">
-                                <div class="form-group">
-                                    <label for="guest">Orang</label>
-                                    <div class="input-group mb-2 mr-sm-2">
-                                        <input type="number" class="form-control" name="guest" placeholder="Guest" value="1">
-                                        <div class="input-group-prepend">
-                                            <div class="input-group-text"><i class="fa fa-user"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md col-12 d-flex align-items-end pb-3">
+                            <div class="col-md-3 col-12 d-flex align-items-end pb-3">
                                 <button type="submit" class="btn btn-primary w-100">
                                     <i class="fas fa-search"></i>
                                     Cek Kamar

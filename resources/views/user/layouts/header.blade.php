@@ -52,9 +52,9 @@
                         <li class="nav-item {{ Session::get('nav') == 1 ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home.index')}}">Beranda</a>
                         </li>
-                        <li class="nav-item {{ Session::get('nav') == 2 ? 'active' : ''}}">
-                            <a class="nav-link" href="{{ route('home.blog')}}">Blog</a>
-                        </li>
+                        {{-- <li class="nav-item {{ Session::get('nav') == 2 ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ route('home.blog')}}">Blog</a>
+                        </li> --}}
                         <li class="nav-item {{ Session::get('nav') == 3 ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home.rooms')}}">Kamar</a>
                         </li>
@@ -73,11 +73,15 @@
                         <li class="nav-item mx-md-2 my-md-0 my-sm-2 my-2">
                             <a class="nav-link btn btn-sm btn-primary text-light" href="{{ route('dashboard.index')}}">Dashboard</a>
                         </li>
+                        @elseif (Auth::user()->role == 0)
+                        <li class="nav-item mx-md-2 my-md-0 my-sm-2 my-2">
+                            <a class="nav-link btn btn-sm btn-primary text-light" href="{{ route('user.dashboard.index')}}">Dashboard</a>
+                        </li>
                         @endif
                         <li class="nav-item mx-md-2 my-md-0 my-sm-2 my-2">
                             <form action="{{ route('auth.logout')}}" method="POST">
                                 @csrf
-                                <button class="nav-link btn btn-sm btn-outline-primary " type="submit" id="btn__login">Logout</button>
+                                <button class="nav-link btn btn-sm btn-outline-primary w-100" type="submit" id="btn__login">Logout</button>
                             </form>
                         </li>
                         @else

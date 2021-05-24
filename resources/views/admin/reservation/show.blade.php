@@ -1,3 +1,22 @@
+@if (Auth::user()->role == 0)
+<div class="row">
+    <div class="col-12">
+        @if ($data->status == 0)
+        <div class="alert alert-warning text-center">
+            Silahkan lakukan pembayaran ke : <br>
+            No. Rekening 123456789 (ABC)
+            A.N Customer Service <br>
+            dan Konfirmasi pembayaran via WA (+6285123xxxxx)
+        </div>
+        @else
+        <div class="alert alert-success text-center">
+            Pemesanan Sudah Diverifikasi. <br> Silahkan Kunjungi Hotel Kami dengan memberikan bukti screenshot halaman ini.
+        </div>
+        @endif
+    </div>
+</div>
+@endif
+
 <ul class="list-group">
     <li class="list-group-item">
         <div class="row">
@@ -15,6 +34,16 @@
         <div class="row">
             <div class="col-md-4">Tipe Kamar</div>
             <div class="col-md-6">{{$data->room->room_type->name}}</div>
+        </div>
+    </li>
+    <li class="list-group-item">
+        <div class="row">
+            <div class="col-md-4">Fasilitas</div>
+            <div class="col-md-6">
+                @foreach ($data->room->facilities as $item)
+                <button class="btn btn-sm btn-outline-dark">{{$item->name}}</button>
+                @endforeach
+            </div>
         </div>
     </li>
     <li class="list-group-item">

@@ -15,15 +15,14 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
+                @if (Auth::user()->role == 1)
                 <li class="sidebar-title">ADMINISTRATOR</li>
-
                 <li class="sidebar-item {{Request::is('admin/dashboard') ? 'active' : ''}}">
                     <a href="{{ route('dashboard.index') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item {{Request::is('admin/user') ? 'active' : ''}}">
                     <a href="{{ route('user.index') }}" class='sidebar-link'>
                         <i class="fas fa-fw fa-users"></i>
@@ -65,6 +64,21 @@
                         <span>Blog</span>
                     </a>
                 </li>
+                @else
+                <li class="sidebar-title">USER</li>
+                <li class="sidebar-item {{Request::is('user/dashboard') ? 'active' : ''}}">
+                    <a href="{{ route('user.dashboard.index') }}" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item {{Request::is('user/reservation') ? 'active' : ''}}">
+                    <a href="{{ route('user.reservation.index') }}" class='sidebar-link'>
+                        <i class="fas fa-fw fa-newspaper"></i>
+                        <span>Reservasi</span>
+                    </a>
+                </li>
+                @endif
 
                 <li class="sidebar-item">
                     <a href="#" onclick="event.preventDefault();

@@ -26,7 +26,7 @@
 <!-- End Breadcrumb -->
 
 <!-- List Rooms -->
-<section class="my-4">
+<section class="my-4" style="min-height: 60vh">
     <div class="container">
         <div class="row">
             <!-- List -->

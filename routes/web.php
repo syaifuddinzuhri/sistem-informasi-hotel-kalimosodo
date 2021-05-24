@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\User\ReservationController as UserReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +32,7 @@ Route::get('/room/{id}', [HomeController::class, 'detailRoom'])->name('home.deta
 Route::get('/facility', [HomeController::class, 'facility'])->name('home.facility');
 Route::get('/about-us', [HomeController::class, 'about'])->name('home.about');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('home.contact');
+Route::post('/search-room', [HomeController::class, 'searchRoom'])->name('home.search.room');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('auth.showLogin');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('auth.showRegister');
@@ -40,12 +43,27 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
+    Route::post('/room/reservation', [HomeController::class, 'reservation'])->name('home.reservation');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::resource(
+            'dashboard',
+            UserDashboardController::class,
+            ['as' => 'user']
+        );
+        Route::resource(
+            'reservation',
+            UserReservationController::class,
+            ['as' => 'user']
+        );
+    });
+
     Route::group(['prefix' => 'admin', 'middleware' => ['role']], function () {
         Route::get('/', function () {
             return route('dashboard.index');
         });
-        Route::put('/reservation/edit-status/{id}', [ReservationController::class, 'editStatus']);
         Route::resource('/dashboard', DashboardController::class);
+        Route::put('/reservation/edit-status/{id}', [ReservationController::class, 'editStatus']);
         Route::resource('/user', UserController::class);
         Route::resource('/customer', CustomerController::class);
         Route::resource('/room', RoomController::class);

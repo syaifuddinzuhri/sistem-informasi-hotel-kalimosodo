@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Facility;
+use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
@@ -27,7 +29,7 @@ class HomeController extends Controller
     public function room()
     {
         Session::put('nav', 3);
-        $rooms = Room::with('room_type')->where('is_active', 1)->paginate(3);
+        $rooms = Room::with('room_type')->where('is_active', 1)->paginate(9);
         return view('user.room', compact('rooms'));
     }
 
@@ -35,7 +37,8 @@ class HomeController extends Controller
     {
         Session::put('nav', 3);
         $room = Room::with('room_type', 'facilities')->findOrFail($id);
-        return view('user.detail-room', compact('room'));
+        $reserv = Reservation::where('room_id', $room->id)->first();
+        return view('user.detail-room', compact('room', 'reserv'));
     }
 
     public function facility()
@@ -55,5 +58,28 @@ class HomeController extends Controller
     {
         Session::put('nav', 6);
         return view('user.contact');
+    }
+
+    public function searchRoom(Request $request)
+    {
+        $payload = $request->only(['check_in', 'check_out', 'room_type_id']);
+        $rooms = Room::with('room_type', 'facilities')->where([
+            'room_type_id' => $request->room_type_id,
+            'is_active' => 1
+        ])->paginate(9);
+        return view('user.room', compact('rooms'));
+    }
+
+    public function reservation(Request $request)
+    {
+        $user = Auth::user();
+        $reserv = Reservation::where('room_id', $request->room_id)->first();
+        if ($reserv) {
+            return redirect()->back()->with('warning', 'Kamar sudah dalam pesanan orang lain');
+        }
+        $payload = $request->only(['room_id', 'guest', 'check_out', 'check_in']);
+        $payload['users_id'] = $user->id;
+        Reservation::create($payload);
+        return redirect()->route('user.reservation.index');
     }
 }
