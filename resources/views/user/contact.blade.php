@@ -23,7 +23,8 @@
 <!-- End Breadcrumb -->
 
 <!-- COntact -->
-<section class="my-5">
+<section class="my-5" style="min-height: 60vh">
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-5">

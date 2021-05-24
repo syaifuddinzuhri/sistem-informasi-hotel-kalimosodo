@@ -86,7 +86,7 @@ class Reservation {
             id = $(this).attr('data-id');
             $.ajax({
                 type: "GET",
-                url: `${APP_URL}/admin/reservation/${id}/edit`,
+                url: `${APP_URL}/api/get-status/${id}`,
                 beforeSend: function () {
                     $('#formEditStatus .body-status').hide();
                     $('#formEditStatus .loading').show();

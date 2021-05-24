@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\Room;
 use App\Models\RoomType;
 use App\Models\User;
 use App\Repositories\Repository;
@@ -101,6 +102,10 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
+        $reserv = Reservation::where('room_id', $request->room_id)->first();
+        if ($reserv) {
+            return redirect()->back()->with('error', 'Kamar sudah dalam pesanan orang lain');
+        }
         $payload = $request->only(['room_id', 'users_id', 'guest', 'check_out', 'check_in']);
         $this->model->create($payload);
         return redirect()->route('reservation.index');
@@ -138,7 +143,21 @@ class ReservationController extends Controller
     public function edit($id)
     {
         $data = $this->model->show($id);
-        return response()->json(['data' => $data], 200);
+        $roomType = RoomType::where('is_active', 1)->get();
+        $users = User::where('role', 0)->get();
+        $room = Room::where('room_type_id', $data->room->room_type_id)->get();
+        $cin = $data->check_in;
+        $cout = $data->check_out;
+        $price = $data->room->price;
+        $day = dateDiffInDays($cin, $cout);
+        $guest = $data->guest;
+        $total = rupiah(($day * $price) * $guest);
+        $dataPrice = [
+            'days' => $day,
+            'totalPrice' => $total,
+            'price' => rupiah($price)
+        ];
+        return view('admin.reservation.edit', compact('roomType', 'users', 'data', 'room', 'dataPrice'));
     }
 
     /**
@@ -150,7 +169,13 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reserv = Reservation::where('room_id', $request->room_id)->first();
+        if ($reserv) {
+            return redirect()->back()->with('error', 'Kamar sudah dalam pesanan orang lain');
+        }
+        $payload = $request->only(['room_id', 'users_id', 'guest', 'check_out', 'check_in']);
+        $this->model->update($payload, $id);
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -161,7 +186,8 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return response()->json(['success' => true], 200);
     }
 
     public function editStatus(Request $request, $id)
@@ -171,5 +197,11 @@ class ReservationController extends Controller
             'status' => $request->status
         ]);
         return response()->json(['success' => true], 200);
+    }
+
+    public function getStatus($id)
+    {
+        $reserv = Reservation::findOrFail($id);
+        return response()->json(['data' => $reserv], 200);
     }
 }

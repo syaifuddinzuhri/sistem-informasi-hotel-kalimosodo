@@ -4,6 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
+use App\Models\Room;
+use App\Models\RoomType;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +15,12 @@ use function App\Helpers\rupiah;
 
 class ReservationController extends Controller
 {
+    protected $model;
+
+    public function __construct(Reservation $reservation)
+    {
+        $this->model = new Repository($reservation);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -43,9 +52,7 @@ class ReservationController extends Controller
                     return rupiah($total);
                 })
                 ->addColumn('action', function ($data) {
-                    $update = '<a href="/user/reservation/' . $data->id . '/edit" ><span class="badge bg-success">
-                <i class="fas fa-edit"></i>
-            </span></a>
+                    $update = '
             <a href="#" data-bs-toggle="modal" class="btn-show-reservation"
                 data-bs-target="#showReservationModal"
                 data-id="' . $data->id . '"><span class="badge bg-info">
@@ -57,6 +64,17 @@ class ReservationController extends Controller
                 <i class="fas fa-trash"></i>
             </span></a>
                 ';
+                    if (Auth::user()->role == 0) {
+                        if ($data->status == 0) {
+                            $update .= '<a href="/user/reservation/' . $data->id . '/edit" ><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>';
+                        }
+                    } else {
+                        $update .= '<a href="/user/reservation/' . $data->id . '/edit" ><span class="badge bg-success">
+                <i class="fas fa-edit"></i>
+            </span></a>';
+                    }
                     return $update;
                 })
                 ->rawColumns(['action', 'status', 'room', 'price'])
@@ -118,7 +136,21 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->model->show($id);
+        $roomType = RoomType::where('is_active', 1)->get();
+        $room = Room::where('room_type_id', $data->room->room_type_id)->get();
+        $cin = $data->check_in;
+        $cout = $data->check_out;
+        $price = $data->room->price;
+        $day = dateDiffInDays($cin, $cout);
+        $guest = $data->guest;
+        $total = rupiah(($day * $price) * $guest);
+        $dataPrice = [
+            'days' => $day,
+            'totalPrice' => $total,
+            'price' => rupiah($price)
+        ];
+        return view('user.edit-reservation', compact('roomType', 'data', 'room', 'dataPrice'));
     }
 
     /**
@@ -130,7 +162,15 @@ class ReservationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Auth::user();
+        $reserv = Reservation::where('room_id', $request->room_id)->first();
+        if ($reserv) {
+            return redirect()->back()->with('error', 'Kamar sudah dalam pesanan orang lain');
+        }
+        $payload = $request->only(['room_id', 'guest', 'check_out', 'check_in']);
+        $payload['users_id'] = $user->id;
+        $this->model->update($payload, $id);
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -141,6 +181,7 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return response()->json(['success' => true], 200);
     }
 }

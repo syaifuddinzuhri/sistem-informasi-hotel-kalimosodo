@@ -23,7 +23,8 @@
 <!-- End Breadcrumb -->
 
 <!-- List Facilites -->
-<section class="mb-5 py-5">
+<section class="mb-5 py-5" style="min-height: 60vh">
+
     <div class="container">
         <div class="row">
             <!-- List -->

@@ -34,7 +34,7 @@
                 <div class="row">
                     @if ($rooms->isEmpty())
                     <div class="alert alert-warning">
-                        Data not found.
+                        Data tidak ditemukan.
                     </div>
                     @else
                     @foreach ($rooms as $item)
@@ -45,7 +45,7 @@
                                 <h5 class="card-title">{{$item->name}}</h5>
                                 <small class="badge bg-danger text-white">{{$item->room_type->name}}</small>
                                 <p class="card-text text-primary">Rp. {{ $item->price }}<sub>/a night</sub></p>
-                                <a href="{{ route('home.detail-room', $item->id)}}" class="btn btn-primary w-100">Detail Room</a>
+                                <a href="{{ route('home.detail-room', $item->id)}}" class="btn btn-primary w-100">Detail Kamar</a>
                             </div>
                         </div>
                     </div>

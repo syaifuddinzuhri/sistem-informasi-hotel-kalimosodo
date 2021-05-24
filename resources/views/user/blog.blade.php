@@ -24,7 +24,8 @@
 <!-- End Breadcrumb -->
 
 <!-- List Blog -->
-<section class="my-5">
+<section class="my-5" style="min-height: 60vh">
+
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">

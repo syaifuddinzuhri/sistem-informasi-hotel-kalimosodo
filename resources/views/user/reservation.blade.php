@@ -19,7 +19,8 @@
     <section class="row">
         <div class="col-12 mb-4">
             <a href="{{route('home.rooms')}}" class="btn btn-primary"><i class="fas fa-plus"></i>Tambah Reservasi</a>
-            <button class="btn btn-success" id="reload"><i class="fas fa-fw fa-refresh"></i></button>
+            <button class="btn btn-success" id="reload"><i class="fas fa-fw fa-sync-alt"></i></button>
+
         </div>
         <div class="col-12">
             <div class="card shadow rounded">
@@ -72,10 +73,10 @@
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 </button>
-                <form id="formDeleteFacility" class="d-inline" method="POST">
+                <form id="formDeleteReservation" class="d-inline" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button id="deleteKategori" type="submit" class="btn btn-danger ml-1 btn-submit">
+                    <button type="submit" class="btn btn-danger ml-1 btn-submit">
                         Delete
                     </button>
                 </form>

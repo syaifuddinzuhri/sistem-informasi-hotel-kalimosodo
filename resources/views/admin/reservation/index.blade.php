@@ -71,10 +71,10 @@
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                     Loading...
                 </button>
-                <form id="formDeleteFacility" class="d-inline" method="POST">
+                <form id="formDeleteReservation" class="d-inline" method="POST">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button id="deleteKategori" type="submit" class="btn btn-danger ml-1 btn-submit">
+                    <button type="submit" class="btn btn-danger ml-1 btn-submit">
                         Delete
                     </button>
                 </form>

@@ -93,7 +93,7 @@
                                     <h5 class="card-title">{{$item->name}}</h5>
                                     <small class="badge bg-danger text-white">{{$item->room_type->name}}</small>
                                     <p class="card-text text-primary">Rp. {{$item->price}}<sub>/a night</sub></p>
-                                    <a href="#" class="btn btn-primary float-right">Book Now</a>
+                                    <a href="{{ route('home.detail-room', $item->id)}}" class="btn btn-primary float-right">Pesan Sekarang</a>
                                 </div>
                             </div>
                         </div>

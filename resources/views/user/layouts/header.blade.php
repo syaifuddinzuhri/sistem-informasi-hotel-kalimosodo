@@ -52,9 +52,9 @@
                         <li class="nav-item {{ Session::get('nav') == 1 ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home.index')}}">Beranda</a>
                         </li>
-                        {{-- <li class="nav-item {{ Session::get('nav') == 2 ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ route('home.blog')}}">Blog</a>
-                        </li> --}}
+                        <li class="nav-item {{ Session::get('nav') == 2 ? 'active' : ''}}">
+                            <a class="nav-link" href="{{ route('home.blog')}}">Blog</a>
+                        </li>
                         <li class="nav-item {{ Session::get('nav') == 3 ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home.rooms')}}">Kamar</a>
                         </li>
@@ -64,9 +64,9 @@
                         <li class="nav-item {{ Session::get('nav') == 5 ? 'active' : ''}}">
                             <a class="nav-link" href="{{ route('home.about')}}">Tentang Kami</a>
                         </li>
-                        <li class="nav-item {{ Session::get('nav') == 6 ? 'active' : ''}}">
-                            <a class="nav-link" href="{{ route('home.contact')}}">Kontak Kami</a>
-                        </li>
+                        {{-- <li class="nav-item {{ Session::get('nav') == 6 ? 'active' : ''}}">
+                        <a class="nav-link" href="{{ route('home.contact')}}">Kontak Kami</a>
+                        </li> --}}
 
                         @if (Auth::user())
                         @if (Auth::user()->role == 1)

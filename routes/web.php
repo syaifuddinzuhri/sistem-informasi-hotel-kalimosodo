@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'api', 'middleware' => ['role']], function () {
         Route::get('/data-facility', [FacilityController::class, 'facility'])->name('api.facility');
         Route::get('/room', [RoomController::class, 'room'])->name('api.room');
+        Route::get('/get-status/{id}', [ReservationController::class, 'getStatus'])->name('api.getstatus');
         Route::get('/room-by-type/{id}', [RoomController::class, 'getRoomByType'])->name('api.roombytype');
         Route::get('/get-price-room/{id}', [RoomController::class, 'getPriceRoom'])->name('api.priceroom');
         Route::get('/room-has-facilities/{id}', [RoomController::class, 'getRoomHasFacilites'])->name('api.roomhasfacilities');
