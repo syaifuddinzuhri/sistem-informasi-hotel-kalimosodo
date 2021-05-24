@@ -11,11 +11,22 @@ class Reservation extends Model
     protected $table = 'Reservation';
 
     protected $fillable = [
-        'user_id',
+        'users_id',
         'room_id',
         'check_in',
         'check_out',
+        'guest',
         'description',
-        'is_active'
+        'status',
     ];
+
+    public function room()
+    {
+        return $this->belongsTo('App\Models\Room', 'room_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'users_id');
+    }
 }

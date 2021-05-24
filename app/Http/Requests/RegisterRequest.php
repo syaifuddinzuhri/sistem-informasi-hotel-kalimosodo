@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:5',
-            'email' => 'required|string|email|unique:users|exists:users,email',
+            'email' => 'required|string|email|unique:users',
             'phone'                 => 'required|string',
             'address'                 => 'required|string',
             'password'              => 'required|string|min:8|confirmed',
@@ -40,7 +40,6 @@ class RegisterRequest extends FormRequest
             'email.required'                        => 'Email tidak boleh kosong',
             'email.unique'                          => 'Email sudah terdaftar',
             'email.email'                           => 'Email tidak valid',
-            'email.exists'                           => 'Email sudah terdaftar',
             'phone.required'                        => 'Nomor HP tidak boleh kosong',
             'address.required'                        => 'Alamat tidak boleh kosong',
             'password.required'                     => 'Password tidak boleh kosong',

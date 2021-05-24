@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FacilityController;
+use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\UserController;
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', function () {
             return route('dashboard.index');
         });
+        Route::put('/reservation/edit-status/{id}', [ReservationController::class, 'editStatus']);
         Route::resource('/dashboard', DashboardController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/customer', CustomerController::class);
@@ -50,11 +52,14 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/facility', FacilityController::class);
         Route::resource('/blog', BlogController::class);
         Route::resource('/room-type', RoomTypeController::class);
+        Route::resource('/reservation', ReservationController::class);
     });
 
-    Route::prefix('api')->group(function () {
+    Route::group(['prefix' => 'api', 'middleware' => ['role']], function () {
         Route::get('/data-facility', [FacilityController::class, 'facility'])->name('api.facility');
         Route::get('/room', [RoomController::class, 'room'])->name('api.room');
+        Route::get('/room-by-type/{id}', [RoomController::class, 'getRoomByType'])->name('api.roombytype');
+        Route::get('/get-price-room/{id}', [RoomController::class, 'getPriceRoom'])->name('api.priceroom');
         Route::get('/room-has-facilities/{id}', [RoomController::class, 'getRoomHasFacilites'])->name('api.roomhasfacilities');
         Route::get('/users', [UserController::class, 'user'])->name('api.user');
         Route::get('/blog', [RoomController::class, 'room'])->name('api.blog');

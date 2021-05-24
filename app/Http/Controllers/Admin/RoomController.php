@@ -161,4 +161,16 @@ class RoomController extends Controller
         }
         return response()->json($facilities);
     }
+
+    public function getRoomByType($id)
+    {
+        $room = Room::where('room_type_id', $id)->get();
+        return response()->json(['data' => $room], 200);
+    }
+
+    public function getPriceRoom($id)
+    {
+        $room = Room::where('id', $id)->pluck('price');
+        return response()->json(['data' => $room], 200);
+    }
 }
