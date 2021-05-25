@@ -44,6 +44,58 @@ class User {
         });
     }
 
+    editUser() {
+        handle.setup();
+        var id = "";
+
+        $("#table_user").on("click", ".btn-edit-user", function () {
+            $("#formEditUser")[0].reset();
+            id = $(this).attr('data-id');
+            $.get(`${APP_URL}/admin/user/${id}/edit`, function (res) {
+                $("#name").val(res.data.name);
+                $("#email").val(res.data.email);
+                $("#address").val(res.data.address);
+                $("#phone").val(res.data.phone);
+            })
+        });
+
+        $("#formEditUser").on("submit", function (e) {
+            e.preventDefault()
+            var url = APP_URL + "/admin/user/" + id
+            var data = {
+                name: $("#name").val(),
+                email: $("#email").val(),
+                address: $("#address").val(),
+                phone: $("#phone").val(),
+            }
+            $.ajax({
+                type: "PUT",
+                url: url,
+                data: data,
+                beforeSend: function () {
+                    $("#formEditUser .btn-loading").show();
+                    $("#formEditUser .btn-submit").hide();
+                },
+                success: function (res) {
+                    $("#formEditUser .btn-loading").hide();
+                    $("#formEditUser .btn-submit").show();
+                    $("#table_user").DataTable().ajax.reload();
+                    $("#formEditUser")[0].reset();
+                    $("#editUserModal").modal("hide");
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                    });
+                },
+                error: (e, x, settings, exception) => {
+                    $("#formEditUser .btn-loading").hide();
+                    $("#formEditUser .btn-submit").show();
+                    handle.errorhandle(e, x, settings, exception);
+                },
+            });
+        })
+    }
+
     deleteUser() {
         handle.setup();
         var id = "";

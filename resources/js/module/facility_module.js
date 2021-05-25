@@ -1,7 +1,7 @@
 import { handle } from "./handle_module";
-class Facility{
+class Facility {
 
-    dataTable(){
+    dataTable() {
         handle.setup()
         $("#table_facility").DataTable({
             responsive: true,
@@ -30,9 +30,9 @@ class Facility{
                     data: "is_active",
                     render: function (data) {
                         if (data == 1) {
-                            return "<span class='badge bg-light-success'>Active</span>"
+                            return "<span class='badge bg-light-success'>Aktif</span>"
                         } else {
-                            return "<span class='badge bg-light-danger'>Non Active</span>";
+                            return "<span class='badge bg-light-danger'>Tidak Aktif</span>";
                         }
                     },
                 },
@@ -50,7 +50,7 @@ class Facility{
     storeFacility() {
         handle.setup();
         var isActive = 0;
-        $("#is_active").on('change', function() {
+        $("#is_active").on('change', function () {
             $(this).is(':checked') ? isActive = 1 : isActive = 0;
 
         });
@@ -115,14 +115,14 @@ class Facility{
         $("#table_facility").on("click", ".btn-edit-facility", function () {
             $("#formEditFacility")[0].reset();
             id = $(this).attr('data-id');
-            $.get(`${APP_URL}/admin/facility/${id}/edit`, function(res){
+            $.get(`${APP_URL}/admin/facility/${id}/edit`, function (res) {
                 $("#name_edit").val(res.data.name);
                 $("#description_edit").val(res.data.description);
                 res.data.is_active == 1 ? $("#is_active_edit").attr("checked", true) : $("#is_active_edit").attr("checked", false);
                 isActive = res.data.is_active
             })
         });
-        $("#is_active_edit").on('change', function() {
+        $("#is_active_edit").on('change', function () {
             $(this).is(':checked') ? isActive = 1 : isActive = 0;
         });
 

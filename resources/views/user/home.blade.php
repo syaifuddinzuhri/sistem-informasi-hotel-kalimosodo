@@ -86,7 +86,7 @@
                         </div>
                         @else
                         @foreach ($rooms as $item)
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <div class="card  shadow rounded mb-4">
                                 <img class="card-img-top" src="{{ asset('room/' . $item->image)}}" alt="Card image cap">
                                 <div class="card-body">

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResrevRequest;
+use App\Models\Blog;
 use App\Models\Facility;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -23,7 +25,15 @@ class HomeController extends Controller
     public function blog()
     {
         Session::put('nav', 2);
-        return view('user.blog');
+        $blogs = Blog::paginate(6);
+        return view('user.blog', compact('blogs'));
+    }
+
+    public function detailBlog($id)
+    {
+        Session::put('nav', 2);
+        $blog = Blog::findOrFail($id);
+        return view('user.detail-blog', compact('blog'));
     }
 
     public function room()
@@ -70,7 +80,7 @@ class HomeController extends Controller
         return view('user.room', compact('rooms'));
     }
 
-    public function reservation(Request $request)
+    public function reservation(ResrevRequest $request)
     {
         $user = Auth::user();
         $reserv = Reservation::where('room_id', $request->room_id)->first();

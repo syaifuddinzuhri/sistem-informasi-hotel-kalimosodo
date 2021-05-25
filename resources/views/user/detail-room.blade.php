@@ -62,7 +62,7 @@
                     <p class="card-text" data-aos="fade-up">{{$room->description}}</p>
                 </div>
                 <div class="facilites mb-4">
-                    <h5 class="card-title text-primary" data-aos="fade-right">Facilites</h5>
+                    <h5 class="card-title text-primary" data-aos="fade-right">Fasilitas</h5>
                     <div class="row">
                         @if ($room->facilities->isEmpty())
                         <div class="alert alert-danger">
@@ -99,14 +99,23 @@
                             <div class="form-group">
                                 <label for="check_in">Check-in</label>
                                 <input type="date" class="form-control" id="check_in" name="check_in" placeholder="Check-in">
+                                @error('check_in')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="check_out">Check-out</label>
                                 <input type="date" class="form-control" id="check_out" name="check_out" placeholder="Check-out">
+                                @error('check_out')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="guest">Jumlah Orang</label>
                                 <input type="number" class="form-control" id="guest" name="guest" placeholder="Jumlah Orang">
+                                @error('guest')
+                                <small class="text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                             <div class="card mb-3">
                                 <div class="card-body text-center">

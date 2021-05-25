@@ -31,7 +31,7 @@
                 <div class="section__body">
                     <div class="row">
                         <div class="col-md-6" data-aos="zoom-in">
-                            <img src="/hotel-templates/assets/img/room-02.jpg" class="w-100 rounded shadow" alt="">
+                            <img src="/template-hotel/assets/img/room-02.jpg" class="w-100 rounded shadow" alt="">
                         </div>
                         <div class="col-md-6 py-3" data-aos="fade-left">
                             <p>vero doloremque alias perspiciatis suscipit nihil necessitatibus labore quisquam obcaecati,
@@ -61,19 +61,19 @@
                 </div>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/hotel-templates/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">Awang Syukriansyah D.</p>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/hotel-templates/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">Farel Putra Hidayat</p>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/hotel-templates/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">Ilham Ibrahim</p>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/hotel-templates/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">M. Syaifuddin Zuhri</p>
             </div>
         </div>

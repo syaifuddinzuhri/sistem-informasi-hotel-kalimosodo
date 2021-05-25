@@ -18,7 +18,7 @@ class CreateBlogTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('image');
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

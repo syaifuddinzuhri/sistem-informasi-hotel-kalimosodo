@@ -16,10 +16,10 @@ const mix = require("laravel-mix");
 //     //
 // ]);
 
-// mix.js("resources/js/facility.js", "public/js").sourceMaps();
-// mix.js("resources/js/room.js", "public/js").sourceMaps();
-// mix.js("resources/js/user.js", "public/js").sourceMaps();
-// mix.js("resources/js/blog.js", "public/js").sourceMaps();
-// mix.js("resources/js/room-type.js", "public/js").sourceMaps();
+mix.js("resources/js/facility.js", "public/js").sourceMaps();
+mix.js("resources/js/room.js", "public/js").sourceMaps();
+mix.js("resources/js/user.js", "public/js").sourceMaps();
+mix.js("resources/js/blog.js", "public/js").sourceMaps();
+mix.js("resources/js/room-type.js", "public/js").sourceMaps();
 mix.js("resources/js/reservation.js", "public/js").sourceMaps();
 mix.js("resources/js/userReservation.js", "public/js").sourceMaps();

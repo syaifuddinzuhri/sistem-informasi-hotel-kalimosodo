@@ -36,36 +36,53 @@
                         <input class="input100" type="text" name="name" placeholder="Masukkan nama lengkap">
                         <span class="focus-input100"></span>
                     </div>
-
+                    @error('name')
+                    <small class="text-danger" role="alert">{{$message}}</small>
+                    @enderror
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Email harus diisi" data-aos="fade-up">
                         <span class="label-input100">Email</span>
                         <input class="input100" type="email" name="email" placeholder="Masukkan email">
                         <span class="focus-input100"></span>
                     </div>
+                    @error('email')
+                    <small class="text-danger" role="alert">{{$message}}</small>
+                    @enderror
 
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Nomor HP harus diisi" data-aos="fade-up">
                         <span class="label-input100">Nomor HP</span>
                         <input class="input100" type="number" name="phone" placeholder="Masukkan nomor hp">
                         <span class="focus-input100"></span>
                     </div>
+                    @error('phone')
+                    <small class="text-danger" role="alert">{{$message}}</small>
+                    @enderror
 
                     <div class="wrap-input100 validate-input m-b-26" data-validate="Alamat harus diisi" data-aos="fade-up">
                         <span class="label-input100">Alamat</span>
                         <textarea class="input100" name="address" placeholder="Masukkan alamat"></textarea>
                         <span class="focus-input100"></span>
                     </div>
+                    @error('address')
+                    <small class="text-danger" role="alert">{{$message}}</small>
+                    @enderror
 
                     <div class="wrap-input100 validate-input m-b-18" data-validate="Password harus diisi" data-aos="fade-up">
                         <span class="label-input100">Password</span>
                         <input class="input100" type="password" name="password" placeholder="********">
                         <span class="focus-input100"></span>
                     </div>
+                    @error('password')
+                    <small class="text-danger" role="alert">{{$message}}</small>
+                    @enderror
 
                     <div class="wrap-input100 validate-input m-b-18" data-validate="Konfirmasi password harus diisi" data-aos="fade-up">
                         <span class="label-input100">Konfirmasi Password</span>
                         <input class="input100" type="password" name="password_confirmation" placeholder="********">
                         <span class="focus-input100"></span>
                     </div>
+                    @error('password_confirmation')
+                    <small class="text-danger" role="alert">{{$message}}</small>
+                    @enderror
 
                     <div class="container-login100-form-btn" data-aos="zoom-in">
                         <button class="login100-form-btn" type="submit">

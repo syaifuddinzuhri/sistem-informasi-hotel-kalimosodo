@@ -8,6 +8,10 @@ use App\Repositories\Repository;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogRequest;
 
+use function App\Helpers\deleteFoto;
+use function App\Helpers\updateFoto;
+use function App\Helpers\uploadFoto;
+
 class BlogController extends Controller
 {
 
@@ -43,9 +47,9 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BlogRequest $request)
+    public function store(Request $request)
     {
-        $payload = $request->all();
+        $payload = $request->only(['title', 'content', 'is_active']);
         if ($request->hasFile('image')) {
             $payload['image'] = uploadFoto($request->file('image'), 'blog');
         }
@@ -84,11 +88,14 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlogRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $this->model->update($data, $id);
-        return response()->json(['success' => true], 200);
+        $payload = $request->only(['title', 'content', 'is_active']);
+        // if ($request->hasFile('image')) {
+        //     $payload['image'] = updateFoto($blog->image, 'blog', $request->file('image'), 'blog');
+        // }
+        $this->model->update($payload, $id);
+        return response()->json(['success' => $payload], 200);
     }
 
     /**
@@ -99,23 +106,28 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
+        $blog = Blog::findOrFail($id);
+        if ($blog->image) {
+            deleteFoto($blog->image, 'blog');
+        }
         $this->model->delete($id);
         return response()->json(['success' => true], 200);
     }
 
-    public function blog(){
+    public function blog()
+    {
         $data = $this->model->all();
         return datatables()->of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($data) {
                 $update = '<a href="#" data-bs-toggle="modal" class="btn-edit-blog"
                 data-bs-target="#editBlogModal"
-                data-id="'. $data->id .'"><span class="badge bg-success">
+                data-id="' . $data->id . '"><span class="badge bg-success">
                 <i class="fas fa-edit"></i>
             </span></a>
             <a href="#" data-bs-toggle="modal" class="btn-delete-blog"
                 data-bs-target="#deleteBlogModal"
-                data-id="'. $data->id .'"><span class="badge bg-danger">
+                data-id="' . $data->id . '"><span class="badge bg-danger">
                 <i class="fas fa-trash"></i>
             </span></a>
                 ';
