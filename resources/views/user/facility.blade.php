@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col-2 d-flex justify-content-center">
-                                        <img src="/hotel-templates/assets/icon/checked.svg" height="30" width="30" alt="">
+                                        <img src="/template-hotel/assets/icon/checked.svg" height="30" width="30" alt="">
                                     </div>
                                     <div class="col-9">
                                         <h5 class="card-title m-0">{{$item->name}}</h5>
