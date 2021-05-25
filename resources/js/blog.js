@@ -6,6 +6,15 @@ $(document).ready(function () {
 
     if (pathURL == "/admin/blog" || pathURL == "/admin/blog/") {
         blog.dataTable();
+
+        $("#btn-add-blog").on("click", function(){
+            $("#formAddBlog")[0].reset();
+            blog.storeBlog();
+        })
+
+        blog.editBlog();
+
+        blog.deleteBlog();
     }
 
 });

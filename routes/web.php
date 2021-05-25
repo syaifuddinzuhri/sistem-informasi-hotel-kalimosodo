@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get-price-room/{id}', [RoomController::class, 'getPriceRoom'])->name('api.priceroom');
         Route::get('/room-has-facilities/{id}', [RoomController::class, 'getRoomHasFacilites'])->name('api.roomhasfacilities');
         Route::get('/users', [UserController::class, 'user'])->name('api.user');
-        Route::get('/blog', [RoomController::class, 'room'])->name('api.blog');
+        Route::get('/blog', [BlogController::class, 'blog'])->name('api.blog');
         Route::get('/data-room-type', [RoomTypeController::class, 'room_type'])->name('api.room_type');
     });
 });

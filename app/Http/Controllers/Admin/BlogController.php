@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogRequest;
 
 class BlogController extends Controller
 {
@@ -42,9 +43,14 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogRequest $request)
     {
-        //
+        $payload = $request->all();
+        if ($request->hasFile('image')) {
+            $payload['image'] = uploadFoto($request->file('image'), 'blog');
+        }
+        $this->model->create($payload);
+        return response()->json(['success' => true], 201);
     }
 
     /**
@@ -55,7 +61,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -66,7 +73,8 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = $this->model->getModel()::findOrFail($id);
+        return response()->json(['success' => true, 'data' => $data], 200);
     }
 
     /**
@@ -76,9 +84,11 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        $this->model->update($data, $id);
+        return response()->json(['success' => true], 200);
     }
 
     /**
@@ -89,7 +99,8 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->model->delete($id);
+        return response()->json(['success' => true], 200);
     }
 
     public function blog(){
