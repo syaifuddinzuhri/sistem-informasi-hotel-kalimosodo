@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function home()
     {
         Session::put('nav', 1);
-        $rooms = Room::with('room_type')->where('is_active', 1)->latest()->limit(5)->get();
+        $rooms = Room::with('room_type')->where('is_active', 1)->latest()->limit(3)->get();
         $roomType = RoomType::where('is_active', 1)->get();
         return view('user.home', compact('roomType', 'rooms'));
     }

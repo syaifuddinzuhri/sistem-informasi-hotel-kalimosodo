@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- Banner -->
-<div class="jumbotron py-3 " id="banner" style="background-image: url('/hotel-templates/assets/img/slide-bg.jpg');">
+<div class="jumbotron py-3 " id="banner" style="background-image: url('{{ asset('img/hotel/1.jpg')}}');">
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-6 text-center banner__content">
@@ -79,10 +79,12 @@
                     <h3 class="display-6 text-primary">Kamar Favorit</h3>
                 </div>
                 <div class="section__body mt-5">
-                    <div class="row favorite__rooms w-100 m-0" data-aos="fade-up">
+                    <div class="row w-100 m-0" data-aos="fade-up">
                         @if ($rooms->isEmpty())
-                        <div class="alert alert-warning">
-                            Data tidak ditemukan.
+                        <div class="col">
+                            <div class="alert alert-warning">
+                                Data tidak ditemukan.
+                            </div>
                         </div>
                         @else
                         @foreach ($rooms as $item)

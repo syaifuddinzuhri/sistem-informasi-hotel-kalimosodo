@@ -31,7 +31,7 @@
                 <div class="section__body">
                     <div class="row">
                         <div class="col-md-6" data-aos="zoom-in">
-                            <img src="/template-hotel/assets/img/room-02.jpg" class="w-100 rounded shadow" alt="">
+                            <img src="{{ asset('img/hotel/1.jpg')}}" class="w-100 rounded shadow" alt="">
                         </div>
                         <div class="col-md-6 py-3" data-aos="fade-left">
                             <p>vero doloremque alias perspiciatis suscipit nihil necessitatibus labore quisquam obcaecati,

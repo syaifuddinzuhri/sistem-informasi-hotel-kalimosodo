@@ -34,7 +34,7 @@
                     @if ($blogs->isEmpty())
                     <div class="col text-center">
                         <div class="alert alert-warning">
-                            Data not found
+                            Data tidak ditemukan.
                         </div>
                     </div>
                     @else

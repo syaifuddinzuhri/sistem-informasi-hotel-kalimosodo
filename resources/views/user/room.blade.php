@@ -33,8 +33,10 @@
             <div class="col-12">
                 <div class="row">
                     @if ($rooms->isEmpty())
-                    <div class="alert alert-warning">
-                        Data tidak ditemukan.
+                    <div class="col">
+                        <div class="alert alert-warning">
+                            Data tidak ditemukan.
+                        </div>
                     </div>
                     @else
                     @foreach ($rooms as $item)
