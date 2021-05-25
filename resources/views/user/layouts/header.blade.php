@@ -8,18 +8,18 @@
     <title>@yield('title') - HOTEL KALIMOSODO</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('hotel-templates') }}/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('template-hotel') }}/vendor/bootstrap/css/bootstrap.min.css" />
     <!-- Hamburger CSS -->
-    <link rel="stylesheet" href="{{ asset('hotel-templates') }}/vendor/hamburgers-master/_sass/hamburgers/hamburgers.css" />
+    <link rel="stylesheet" href="{{ asset('template-hotel') }}/vendor/hamburgers-master/_sass/hamburgers/hamburgers.css" />
     <!-- Slick -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('hotel-templates') }}/vendor/slick/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('hotel-templates') }}/vendor/slick/slick/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('template-hotel') }}/vendor/slick/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('template-hotel') }}/vendor/slick/slick/slick-theme.css" />
     <!-- AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('hotel-templates') }}/vendor/fontawesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="{{ asset('template-hotel') }}/vendor/fontawesome/css/fontawesome.min.css" />
     <!-- CSS Style -->
-    <link rel="stylesheet" href="{{ asset('hotel-templates') }}/assets/css/style.css" />
+    <link rel="stylesheet" href="{{ asset('template-hotel') }}/assets/css/style.css" />
     @yield('css')
 </head>
 
