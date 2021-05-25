@@ -61,19 +61,19 @@
                 </div>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="{{asset('img/avatar1.png')}}" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">Awang Syukriansyah D.</p>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="{{asset('img/avatar2.png')}}" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">Farel Putra Hidayat</p>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="{{asset('img/avatar3.png')}}" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">Ilham Ibrahim</p>
             </div>
             <div class="col-md-3 col-6 text-center mb-4" data-aos="fade-up">
-                <img src="/template-hotel/assets/img/man1.jpg" alt="" class="rounded-circle" width="150" height="150">
+                <img src="{{asset('img/avatar4.png')}}" alt="" class="rounded-circle" width="150" height="150">
                 <p class="my-3">M. Syaifuddin Zuhri</p>
             </div>
         </div>
