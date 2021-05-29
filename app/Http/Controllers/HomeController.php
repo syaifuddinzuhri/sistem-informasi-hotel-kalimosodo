@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function blog()
     {
         Session::put('nav', 2);
-        $blogs = Blog::paginate(6);
+        $blogs = Blog::where('is_active', 1)->paginate(6);
         return view('user.blog', compact('blogs'));
     }
 
