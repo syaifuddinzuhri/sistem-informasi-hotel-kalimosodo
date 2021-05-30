@@ -34,14 +34,11 @@
                             <img src="{{ asset('img/hotel/1.jpg')}}" class="w-100 rounded shadow" alt="">
                         </div>
                         <div class="col-md-6 py-3" data-aos="fade-left">
-                            <p>vero doloremque alias perspiciatis suscipit nihil necessitatibus labore quisquam obcaecati,
-                                sapiente vel! Nulla id minus labore velit deserunt iusto, nemo cum doloribus tempore modi est rem
-                                maiores. Illum cupiditate harum consequuntur eligendi itaque? Quo, enim similique animi cumque at
-                                dolorum. Cum minima voluptas quae alias? Iusto, architecto laborum! Excepturi soluta dignissimos
-                                placeat quos sapiente debitis rem. Mollitia quis tempore at molestias ad accusamus, quos odio
-                                cumque, et sed earum dicta praesentium ab officiis hic voluptatem atque. Inventore animi laudantium
-                                praesentium deserunt, quis adipisci cumque molestiae dolorum, perferendis repudiandae laborum odit
-                                eius excepturi maiores eaque dolores a dolor nihil. Rem quaerat adipisci quis eaque!</p>
+                            <p align="justify">Hotel Kalimosodo adalah hotel dekat bandara Bandar Udara Abdul Rachman Saleh (MLG)
+                               dan merupakan pilihan tepat untuk bermalam sambil menunggu jadwal penerbangan berikutnya.
+                               Dapatkan tempat untuk istirahat yang nyaman di tengah persinggahan sementara Anda.
+                               Tidak hanya itu Hotel Kalimosodo adalah hotel dengan fasilitas terlengkap dan memiliki banyak tipe kamar oleh karena itu hotel kalimosodo sangat diminati oleh masyarakat.
+                               Kami juga sangat mengutamakan Kebahagian dan Kenyamanan Pelanggan / customer Adalah nomer 1 sehingga kita akan selalu melakukan yang terbaik dengan pelayan hotel yang pasti pelanggan / customer akan sangat nyaman menginap di hotel kalimosodo</p>
                         </div>
                     </div>
                 </div>
