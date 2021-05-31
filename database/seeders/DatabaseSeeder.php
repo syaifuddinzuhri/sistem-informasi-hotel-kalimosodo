@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +28,14 @@ class DatabaseSeeder extends Seeder
             ['name'  => 'Bathub', 'is_active' => 1],
         ];
         DB::table('facility')->insert($fasilitas);
+
+        User::create([
+            'name' => 'Administrator',
+            'address' => 'Malang',
+            'phone' => '08512345678',
+            'email' => 'admin@gmail.com',
+            'role' => 1,
+            'password' => Hash::make('admin1234')
+        ]);
     }
 }

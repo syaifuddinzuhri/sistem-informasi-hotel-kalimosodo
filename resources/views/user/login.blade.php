@@ -23,7 +23,7 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <div class="login100-form-title py-5" style="background-image: url(/template-hotel/assets/img/slide-bg.jpg);">
+                <div class="login100-form-title py-5" style="background-image: url({{asset('img/hotel/1.jpg')}});">
                     <span class="login100-form-title-1" data-aos="zoom-in">
                         Log In
                     </span>
